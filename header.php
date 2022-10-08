@@ -9,4 +9,7 @@
 <!-- Bootstrap -->
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Fontawesome -->
-<link href="libfontawesome/css/all.min.css" rel="stylesheet" />
+<link href="lib/fontawesome/css/all.min.css" rel="stylesheet" />
+
+<!-- Main -->
+<link href="ext/css/app.css" rel="stylesheet" />
