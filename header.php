@@ -12,25 +12,39 @@
 <link href="lib/fontawesome/css/all.min.css" rel="stylesheet" />
 <!-- Reset CSS -->
 <link href="ext/css/reset.css" rel="stylesheet" />
+<!-- Pages -->
+<link href="ext/css/page.css" rel="stylesheet" />
 <!-- Main -->
 <link href="ext/css/app.css" rel="stylesheet" />
 
 <?php
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI);
-$pages = ['home', 'services', 'about'];
+$pages = ['home', 'services', 'about', 'login'];
+$clientPages = ['categories', 'services offer', 'products', 'logout'];
 
 // check if the query is empty and redirect to home page
-if(isset($path['query']) && !in_array(strtolower($path['query']), $pages)) {
+if (isset($path['query']) && !in_array(strtolower($path['query']), $pages)) {
+    parse_str($path['query'], $params);
+} else {
+    header('Location: index.php?page=home');
+}
+
+// check if the query is empty and redirect to home page
+if (isset($path['query']) && !in_array(strtolower($path['query']), $clientPages)) {
     parse_str($path['query'], $params);
 } else {
     header('Location: index.php?page=home');
 }
 
 
+
 ?>
 
-<nav class="navbar my-navbar navbar-expand-md navbar-light bg-white">
+<!-- Condition Here -->
+
+<!-- Default  Navbar -->
+<nav class="navbar my-navbar navbar-expand-md ">
     <div class="container">
         <a class="navbar-brand" href="#">
 
@@ -61,7 +75,56 @@ if(isset($path['query']) && !in_array(strtolower($path['query']), $pages)) {
                             } ?>">
                     <a class="nav-link" href="index.php?page=about">About Us </a>
                 </li>
+                <li class="<?php if ($params['page'] == "login") {
+                                echo "nav-item nav-active";
+                            } else {
+                                echo "nav-item";
+                            } ?>">
+                    <a class="nav-link" href="index.php?page=login">Login </a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+
+<!-- Customer Navbar -->
+
+<!-- <nav class="navbar my-navbar navbar-expand-md ">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+
+            LOGO</a>
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="<?php if ($params['page'] == "home" || empty($params['page'])) {
+                                echo "nav-item nav-active";
+                            } else {
+                                echo "nav-item";
+                            } ?>">
+                    <a class="nav-link" href="index.php?page=home">Categories <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="<?php if ($params['page'] == "categories") {
+                                echo "nav-item nav-active";
+                            } else {
+                                echo "nav-item";
+                            } ?>">
+                    <a class="nav-link" href="index.php?page=services-offer">Services Offer</a>
+                </li>
+                <li class="<?php if ($params['page'] == "about") {
+                                echo "nav-item nav-active";
+                            } else {
+                                echo "nav-item";
+                            } ?>">
+                    <a class="nav-link" href="index.php?page=products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> -->
