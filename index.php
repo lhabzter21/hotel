@@ -3,6 +3,8 @@
 
 <?php include('header.php'); ?>
 
+
+
 <body>
 
     <?php
@@ -10,7 +12,8 @@
     include $page . '.php';
     ?>
 
+
 </body>
-<?php include('footer.php') ?>
+
 
 </html>

@@ -1,6 +1,3 @@
-<?php include('header.php'); ?>
-
-
 <header class="masthead">
     <div class="container h-100">
         <div class="row text-center  h-100 align-items-center justify-content-center">
@@ -11,5 +8,4 @@
         </div>
     </div>
 </header>
-
-<?php include('footer.php'); ?>
+</header>
