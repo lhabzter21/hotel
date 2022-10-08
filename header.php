@@ -18,9 +18,17 @@
 <?php
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI);
-parse_str($path['query'], $params);
-?>
+$pages = ['home', 'services', 'about'];
 
+// check if the query is empty and redirect to home page
+if(isset($path['query']) && !in_array(strtolower($path['query']), $pages)) {
+    parse_str($path['query'], $params);
+} else {
+    header('Location: index.php?page=home');
+}
+
+
+?>
 
 <nav class="navbar my-navbar navbar-expand-md navbar-light bg-white">
     <div class="container">
@@ -32,7 +40,7 @@ parse_str($path['query'], $params);
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="<?php if ($params['page'] == "home") {
+                <li class="<?php if ($params['page'] == "home" || empty($params['page'])) {
                                 echo "nav-item nav-active";
                             } else {
                                 echo "nav-item";
