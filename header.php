@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title><?php echo $_SESSION['setting_hotel_name'] ?></title>
+<title><?php echo isset($_SESSION['setting_hotel_name']) ? $_SESSION['setting_hotel_name']:'Company Name' ?></title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 
@@ -80,7 +80,7 @@ if (isset($path['query']) && !in_array(strtolower($path['query']), $clientPages)
                             } else {
                                 echo "nav-item";
                             } ?>">
-                    <a class="nav-link" href="index.php?page=login">Login </a>
+                    <a class="nav-link" href="admin/index.php">Login </a>
                 </li>
             </ul>
         </div>
