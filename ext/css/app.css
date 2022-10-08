@@ -6,10 +6,11 @@ body {
 }
 
 .my-navbar {
-	box-shadow: 0px 10px 30px rgba(216, 216, 216, 0.45);
 	position: fixed;
 	width: 100%;
 	padding: 24px 12px;
+	background: #000000;
+	z-index: 2;
 }
 
 .navbar-toggler {
@@ -25,33 +26,53 @@ body {
 	width: 50px;
 }
 
+.nav-item {
+	padding-bottom: 4px;
+}
+
+.nav-item a {
+	color: #ffffff;
+}
+
 .nav-link {
-	border-bottom: 4px solid white;
 	margin-right: 24px;
 	transition: 0.3s ease;
+	padding: 8px;
+	font-weight: 800;
 }
 
 .nav-link:hover {
-	color: black;
-	border-bottom: 4px solid #eb4027;
+	/* border-bottom: 4px solid #eb4027; */
+	color: #eb4027;
 }
 
 .nav-active a {
-	color: black !important;
-	font-weight: 600;
+	color: #eb4027;
+	border-bottom: 4px solid #eb4027;
 }
 
 .navbar-nav .nav-item:last-of-type a {
 	margin-right: 0;
 }
 
-.navbar-nav .nav-link {
-	padding: 5px 6px;
-}
-
 .fa-bars {
 	color: rgba(0, 0, 0, 0.9);
 }
+
+/* Solid Bg State */
+
+/* .navbar.-solid {
+	background: #ffffff;
+}
+
+.navbar.-solid .container .navbar-collapse .nav-item .nav-link {
+	color: #000000;
+}
+
+.navbar.-solid .container .navbar-collapse .nav-item .nav-link:hover,
+.navbar.-solid .container .navbar-collapse .nav-item.nav-active a {
+	border-bottom: 4px solid #000000;
+} */
 
 /** Navbar **/
 
@@ -87,3 +108,9 @@ body {
 }
 
 /** Masthead Banner **/
+
+@media only screen and (max-width: 767px) {
+	.fa-bars {
+		color: #ffffff;
+	}
+}
