@@ -80,7 +80,7 @@ if (isset($path['query']) && !in_array(strtolower($path['query']), $clientPages)
                             } else {
                                 echo "nav-item";
                             } ?>">
-                    <a class="nav-link" href="index.php?page=login">Login </a>
+                    <a class="nav-link" href="admin/index.php">Login </a>
                 </li>
             </ul>
         </div>
