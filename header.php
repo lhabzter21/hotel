@@ -46,8 +46,12 @@ parse_str($path['query'], $params);
                             } ?>">
                     <a class="nav-link" href="index.php?page=services">Services</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us </a>
+                <li class="<?php if ($params['page'] == "about") {
+                                echo "nav-item nav-active";
+                            } else {
+                                echo "nav-item";
+                            } ?>">
+                    <a class="nav-link" href="index.php?page=about">About Us </a>
                 </li>
             </ul>
         </div>
