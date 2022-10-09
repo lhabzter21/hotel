@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include('header.php');?>
+<?php include('components/header.php');?>
 
 <style>
     .card-custom { margin-top: 5vh;}
@@ -48,6 +48,6 @@
         </div>
     </div>
 </body>
-<?php include('footer.php');?>
+<?php include('components/footer.php');?>
 
 </html>
