@@ -8,18 +8,18 @@
 
     .banner { display: none; }
 
-    @media (min-width: 768px) { 
-        .card-custom { margin-top: 15vh; }
+    @media (min-width: 992px) { 
+        .card-custom { margin-top: vh; }
         .banner {  display: block; }
     }
 </style>
 
 <body>
     <div class="row">
-        <div class="col-md-7 banner">
+        <div class="col-lg-7 banner">
             <img src="../ext/img/1664437680_treatment 2.jpg" class="img-fluid" alt="banner">
         </div>
-        <div class="col-md-5 col-sm-12">
+        <div class="col-lg-5 col-md-12 col-sm-12">
             <div class="container">
                 <div class="card card-custom">
                     <div class="card-body">
@@ -71,7 +71,7 @@
                                     <option value="Female">Female</option>
                                 </select>
                                 <div id="validation_gender" class="invalid-feedback">
-                                    Please provide an address.
+                                    Please provide an gender.
                                 </div>
                             </div>
                             <div class="form-group">
@@ -99,7 +99,24 @@
 
 <script>
 
+    function validateEmail(input) {
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return input.value.match(validRegex) ? true:false;
+    }
+
     $("#btnRegister").click(function(){
+
+
+        if($("#email").val() != '') {
+            let chk = !validateEmail(document.getElementById('email'));
+
+            console.log(chk)
+            if(chk) {
+                $("#email").addClass('is-invalid')
+                $("#validation_email").text('Invalid email')
+                return false;
+            }
+        }
 
         $.ajax({
 			url:'ajax.php?action=register',
