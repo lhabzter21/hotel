@@ -67,3 +67,16 @@ body {
 .content-body-custom {
   display: none;
 }
+
+.img-custom {
+  height: 80px;
+  min-height: 80px;
+  width: 80px;
+  min-width: 80px;
+  border: 1px solid silver;
+}
+
+input.form-control, select.form-control, textarea.form-control {
+  margin-top: 6px !important;
+  margin-bottom: 20px !important;
+}

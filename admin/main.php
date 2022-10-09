@@ -5,7 +5,11 @@
 <link href="../ext/css/admin.css" rel="stylesheet" />
 
 <body>
-<?php include('components/navsidebar.php'); ?>
+  <!-- init DB connection for all the pages -->
+  <?php include('db_connect.php'); ?>
+
+  <?php include('components/navsidebar.php'); ?>
+
 <main class="content-wrapper content-main">
   <?php include('modules/home.php'); ?>
   <?php include('modules/booked.php'); ?>
@@ -18,8 +22,8 @@
 </main>
 
 </body>
-<?php include('components/footer.php');?>
 
+<?php include('components/footer.php');?>
 <script src="../ext/js/main.js"></script>
 
 </html>

@@ -2,8 +2,8 @@
     <h1 class="text-success">Appointment Reservation</h1>
     <hr class="mb-5"/>
 
-    <table class="table table-bordered tbl-reservation table-hover">
-        <thead>
+    <table class="table tbl-reservation table-hover">
+        <thead class="bg-info text-white">
             <th>#</th>
             <th>Room Category</th>
             <th>Room No.</th>
@@ -13,7 +13,6 @@
         </thead>
         <tbody>
             <?php 
-                include('db_connect.php'); 
                 $i = 1;
                 $checked = $conn->query("
                     SELECT 
@@ -34,14 +33,14 @@
                 while( $row = $checked->fetch_assoc()):
             ?>
                 <tr>
-                    <td class="text-center"><?php echo $i++ ?></td>
-                    <td class="text-center"><?php echo $row['room_category'] ?></td>
-                    <td class=""><?php echo $row['room'] ?></td>
-                    <td class="">$<?php echo $row['room_price'] ?></td>
-                    <td class="text-center">
+                    <td><?php echo $i++ ?></td>
+                    <td><?php echo $row['room_category'] ?></td>
+                    <td><?php echo $row['room'] ?></td>
+                    <td>₱<?php echo $row['room_price'] ?></td>
+                    <td>
                         <span class="badge <?php echo $row['room_status'] == '1' ? 'badge-success':'badge-warning' ?> "><?php echo $row['room_status'] == '1' ? 'Available':'Unavailable' ?></span>
                     </td>
-                    <td class="text-center">
+                    <td>
                         <button class="btn btn-sm btn-primary" <?php echo $row['room_status'] == '1' ? '':'disabled' ?> type="button" data-id="<?php echo $row['room_id'] ?>">Reserve</button>
                     </td>
                 </tr>

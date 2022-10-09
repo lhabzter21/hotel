@@ -50,21 +50,40 @@ function activePage() {
         $(this).addClass('content-body-custom')
     })
 
-    if(active_page === 'Home') { $("#home_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Booked') { $("#booked_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Reservation') { $("#reservation_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Check Out') { $("#checkout_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Services Offer') { $("#services_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Products Offer') { $("#products_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Users') { $("#users_content").removeClass('content-body-custom'); } 
-    if(active_page === 'Site Settings') { $("#site_setting_content").removeClass('content-body-custom'); } 
+    switch(active_page) {
+        case "Home": 
+            $("#home_content").removeClass('content-body-custom');
+            break;
+        case "Booked": 
+            $("#booked_content").removeClass('content-body-custom');
+            break;
+        case "Reservation": 
+            $("#reservation_content").removeClass('content-body-custom');
+            break;
+        case "Check Out": 
+            $("#checkout_content").removeClass('content-body-custom');
+            break;
+        case "Services Offer": 
+            $("#services_content").removeClass('content-body-custom');
+            break;
+        case "Products Offer": 
+            $("#products_content").removeClass('content-body-custom');
+            break;
+        case "Users": 
+            $("#users_content").removeClass('content-body-custom');
+            break;
+        case "Site Settings": 
+            $("#site_setting_content").removeClass('content-body-custom');
+            break;
+        default: 
+            break;
+    }
 
     navItemActive(active_page);
 
 }
 
 function navItemActive(nav_name) {
-
     // remove active class on nav-item
     $('.navbar-nav .nav-item').each(function() {
         $(this).removeClass('active')
@@ -78,29 +97,6 @@ function navItemActive(nav_name) {
     })
 }
 
-function format(d) {
-    return (
-        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-        '<tr>' +
-        '<td>Full name:</td>' +
-        '<td>' +
-        d.ref_no +
-        '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Extension number:</td>' +
-        '<td>' +
-        d.ref_no +
-        '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Extra info:</td>' +
-        '<td>And any further details here (images etc)...</td>' +
-        '</tr>' +
-        '</table>'
-    );
-}
-
 $(document).ready(function(){
     // default page
     if(sessionStorage.getItem('active_page') == null) {
@@ -110,8 +106,18 @@ $(document).ready(function(){
     activePage();
 
     // initialize datatables
-    $('.tbl-booked').dataTable()
-    $('.tbl-reservation').dataTable()
-    $('.tbl-checkout').dataTable()
+    // Reference: https://datatables.net/reference/option/dom
+    $('.tbl-booked').dataTable({"dom": "frtip"});
+    $('.tbl-reservation').dataTable({"dom": "frtip"});
+    $('.tbl-checkout').dataTable({"dom": "frtip"});
+    $('.tbl-products-offer').dataTable({"dom": "tp"});
+    $('.tbl-services-offer').dataTable({"dom": "tp"});
+    $('.tbl-users').dataTable({"dom": "frtip"});
+
+    // initialize editor
+    tinymce.init({
+        selector: '#txt-editor',
+        height: 400,
+    });
     
 })
