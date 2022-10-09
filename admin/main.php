@@ -6,7 +6,6 @@
 
 <body>
 <?php include('components/navsidebar.php'); ?>
-
 <main class="content-wrapper content-main">
   <?php include('modules/home.php'); ?>
   <?php include('modules/booked.php'); ?>
