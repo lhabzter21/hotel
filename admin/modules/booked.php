@@ -2,8 +2,8 @@
     <h1 class="text-success">Booked</h1>
     <hr class="mb-5"/>
 
-    <table class="table table-bordered tbl-booked table-hover">
-        <thead>
+    <table class="table tbl-booked table-hover">
+        <thead class="bg-info text-white">
             <th>#</th>
             <th>Room Category</th>
             <th>Checked In</th>
@@ -13,7 +13,6 @@
         </thead>
         <tbody>
             <?php 
-                include('db_connect.php'); 
                 $i = 1;
                 $checked = $conn->query("
                     SELECT 
@@ -36,13 +35,14 @@
                 while( $row = $checked->fetch_assoc()):
             ?>
                 <tr>
-                    <td class="text-center"><?php echo $i++ ?></td>
-                    <td class="text-center"><?php echo $row['room_name'] ?></td>
-                    <td class="text-center"><?php echo $row['checked_in_name'] ?></td>
-                    <td class=""><?php echo $row['ref_no'] ?></td>
-                        <td class="text-center"><span class="badge badge-warning">Booked</span></td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-primary check_out" type="button" data-id="<?php echo $row['checked_id'] ?>">View</button>
+                    <td><?php echo $i++ ?></td>
+                    <td><?php echo $row['room_name'] ?></td>
+                    <td><?php echo $row['checked_in_name'] ?></td>
+                    <td><?php echo $row['ref_no'] ?></td>
+                        <td><span class="badge badge-warning">Booked</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" type="button">View</button>
+                        <button class="btn btn-sm btn-primary" type="button">Edit</button>
                     </td>
                 </tr>
             <?php endwhile; ?>

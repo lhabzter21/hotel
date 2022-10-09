@@ -14,6 +14,8 @@
 <link href="../ext/css/reset.css" rel="stylesheet" />
 <!-- DataTables -->
 <link href="../lib/DataTables/datatables.min.css" rel="stylesheet" />
+<!-- TinyMCE -->
+<script src='../lib/tinymce/js/tinymce/tinymce.min.js'></script>
 <!-- Main -->
 <link href="../ext/css/app.css" rel="stylesheet" />
 

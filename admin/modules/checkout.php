@@ -2,8 +2,8 @@
     <h1 class="text-success">Check Out</h1>
     <hr class="mb-5"/>
 
-    <table class="table table-bordered tbl-checkout table-hover">
-        <thead>
+    <table class="table tbl-checkout table-hover">
+        <thead class="bg-info text-white">
             <th>#</th>
             <th>Room Category</th>
             <th>Room No.</th>
@@ -14,7 +14,6 @@
         </thead>
         <tbody>
             <?php 
-                include('db_connect.php'); 
                 $i = 1;
                 $checked = $conn->query("
                     SELECT 
@@ -45,15 +44,15 @@
                 while( $row = $checked->fetch_assoc()):
             ?>
                 <tr>
-                    <td class="text-center"><?php echo $i++ ?></td>
-                    <td class="text-center"><?php echo $row['room_category'] ?></td>
-                    <td class=""><?php echo $row['room_num'] ?></td>
-                    <td class="">$<?php echo $row['room_price'] ?></td>
-                    <td class=""><?php echo $row['checked_in_name'] ?></td>
-                    <td class="text-center">
+                    <td><?php echo $i++ ?></td>
+                    <td><?php echo $row['room_category'] ?></td>
+                    <td><?php echo $row['room_num'] ?></td>
+                    <td>₱<?php echo $row['room_price'] ?></td>
+                    <td><?php echo $row['checked_in_name'] ?></td>
+                    <td>
                         <span class="badge <?php echo $row['checked_status'] == '1' ? 'badge-warning':'badge-success' ?> "><?php echo $row['checked_status'] == '1' ? 'Checked In':'Checked Out' ?></span>
                     </td>
-                    <td class="text-center">
+                    <td>
                         <button class="btn btn-sm btn-primary btn-view-details-checkout" type="button">View Details</button>
                     </td>
                 </tr>

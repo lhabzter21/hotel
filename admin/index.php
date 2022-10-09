@@ -15,6 +15,11 @@
     }
 
     body { overflow: hidden !important; }
+
+    input.form-control, select.form-control, textarea.form-control {
+        margin-top: 6px !important;
+        margin-bottom: 20px !important;
+    }
 </style>
 
 <body>
