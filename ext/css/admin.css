@@ -61,4 +61,9 @@ body {
   .content-wrapper {
     margin-left: 280px;
   }
+
+}
+
+.content-body {
+  display: none;
 }
