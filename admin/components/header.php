@@ -12,5 +12,8 @@
 <link href="../lib/fontawesome/css/all.min.css" rel="stylesheet" />
 <!-- Reset CSS -->
 <link href="../ext/css/reset.css" rel="stylesheet" />
+<!-- DataTables -->
+<link href="../lib/DataTables/datatables.min.css" rel="stylesheet" />
 <!-- Main -->
 <link href="../ext/css/app.css" rel="stylesheet" />
+
