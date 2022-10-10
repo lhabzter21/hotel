@@ -1,6 +1,13 @@
 <?php include('component/masthead.php'); ?>
 
-<section class="about my-5 ">
+<section>
+    <div class="container my-5">
+        <?php echo isset($_SESSION['setting_about_content']) ? html_entity_decode($_SESSION['setting_about_content']):''?>
+    </div>
+</section>
+
+
+<!-- <section class="about my-5 ">
     <div class="container wrapper">
         <div class="content">
             <img src="https://picsum.photos/id/237/600/600" />
@@ -69,4 +76,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->

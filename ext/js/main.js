@@ -33,6 +33,44 @@ if($("#booked_graph")) {
     });
 }
 
+$("#btn_view_booked").click(function() {
+    let id = $(this).data('id');
+    uni_modal('Booked Details', 'modules/modal/booked_modal_view.php?id='+id)
+})
+
+$(document).on('click', '#btn_booked_checkout', function() {
+    let id = $(this).data('id1')
+    let rid = $(this).data('id2')
+    $.ajax({
+        url:'ajax.php?action=save_checkout',
+        method:'POST',
+        data:{
+            id: id,
+            rid: rid
+        },
+        success:function(res){
+            if(res ==1){
+                location.reload()
+            }
+        }
+    })
+})
+
+$(document).on('click','#btn_booked_update', function() {
+    let frm = $(this).parent().parent().find('form').serialize()
+
+    $.ajax({
+        url:'ajax.php?action=save_check_in',
+        method:'POST',
+        data: frm,
+        success:function(resp){
+            if(resp > 0 ){
+                location.reload()
+            }
+        }
+    })
+})
+
 // set an active page
 $(".nav-item a").click(function(){
     let nav_item_name = $(this).text().trim()
@@ -94,6 +132,24 @@ function navItemActive(nav_name) {
     if($(this).text() === nav_name) {
         $(this).parent().parent().addClass('active')
     }
+    })
+}
+
+window.uni_modal = function(title = '' , url=''){
+
+    $.ajax({
+        url:url,
+        error:err=>{
+            console.log()
+            alert("An error occured")
+        },
+        success:function(res){
+            if(res){
+                $('#uni_modal .modal-title').text(title)
+                $('#uni_modal .modal-body').html(res)
+                $('#uni_modal').modal('show')
+            }
+        }
     })
 }
 

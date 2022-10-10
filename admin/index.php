@@ -17,8 +17,6 @@
   }
 ?>
 
-
-
 <body>
   <?php include('components/navsidebar.php'); ?>
 
@@ -33,7 +31,10 @@
   <?php include('modules/site_settings.php'); ?>
 </main>
 
+<?php include('components/modal.php');?>
+
 </body>
+
 
 <?php include('components/footer.php');?>
 <script src="../ext/js/main.js"></script>
