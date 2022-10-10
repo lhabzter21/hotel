@@ -37,17 +37,21 @@
     </button>
 </div>
 
-<div class="container my-5 p-5">
-    <div class="box">
-        <div class="row">
-            <div class="col-md-8">
-                <label for="" class="mb-2">Apointment Date</label>
-                <input type="text" class="form-control input-lg" id="range_date">
-            </div>
-            <div class="col-md-4">
-                <label for="" class="mb-2">&nbsp;</label>
-                <button class="btn btn-primary btn-block" id="btn_check_sched">Check Schedule</button>
+<?php if(isset($_SESSION['login_id'])){?>
+    <?php if($_SESSION['login_type'] == 3){?>
+        <div class="container my-5 p-5">
+            <div class="box">
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="" class="mb-2">Apointment Date</label>
+                        <input type="text" class="form-control input-lg" id="range_date">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="" class="mb-2">&nbsp;</label>
+                        <button class="btn btn-primary btn-block btn-orange" id="btn_check_sched">Check Schedule</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    <?php } ?>
+<?php } ?>

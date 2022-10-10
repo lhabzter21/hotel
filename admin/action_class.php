@@ -58,47 +58,6 @@ class Action {
 		header("Location: index.php");
 	}
 
-    function save_check_in(){
-		extract($_POST);
-		$data = " room_id = '$rid' ";
-		$data .= ", name = '$name' ";
-		$data .= ", contact_no = '$contact' ";
-		$data .= ", status = 1 ";
-
-		$data .= ", date_in = '".$date_in.' '.$date_in_time."' ";
-		$out= date("Y-m-d H:i",strtotime($date_in.' '.$date_in_time.' +'.$days.' days'));
-		$data .= ", date_out = '$out' ";
-		$i = 1;
-		while($i== 1){
-			$ref  = sprintf("%'.04d\n",mt_rand(1,9999999999));
-			if($this->db->query("SELECT * FROM checked where ref_no ='$ref'")->num_rows <= 0)
-				$i=0;
-		}
-		$data .= ", ref_no = '$ref' ";
-
-		if(empty($id)){
-			$save = $this->db->query("INSERT INTO checked set ".$data);
-			$id=$this->db->insert_id;
-		}else{
-			$save = $this->db->query("UPDATE checked set ".$data." where id=".$id);
-		}
-		if($save){
-
-			$this->db->query("UPDATE rooms set status = 1 where id=".$rid);
-					return $id;
-		}
-	}
-
-    function save_checkout(){
-		extract($_POST);
-			$save = $this->db->query("UPDATE checked set status = 2 where id=".$id);
-			if($save){
-
-				$this->db->query("UPDATE rooms set status = 0 where id=".$rid);
-						return 1;
-			}
-	}
-
     public function register() {
         $requests = $_POST;
         $validate = $this->validation($requests);

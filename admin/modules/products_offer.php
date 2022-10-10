@@ -6,18 +6,26 @@
         <div class="col-lg-4 col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
-                    Products Form
+                    Product Form
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="">Products Offer</label>
+                        <label for="">Product Name <span class="text-danger">*</span></label>
                         <input type="text"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="">Category</label>
+                        <label for="">Price (₱) <span class="text-danger">*</span></label>
+                        <input type="number"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Category <span class="text-danger">*</span></label>
                         <select name="" id="" class="form-control">
                             <?php
-                                $cat = $conn->query("SELECT * FROM room_categories order by name asc ");
+                                $cat = $conn->query("SELECT * FROM categories order by name asc ");
                                 while($row= $cat->fetch_assoc()) {
                                     $cat_name[$row['id']] = $row['name'];
                             ?>
@@ -26,7 +34,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Availability</label>
+                        <label for="">Availability <span class="text-danger">*</span></label>
                         <select class="form-control" name="" id="">
                             <option value="0">Available</option>
 						    <option value="1">Unavailable</option>
@@ -34,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-success">Add Record</button>
                 </div>
             </div>
         </div>
@@ -42,14 +50,14 @@
         <div class="col-lg-8 col-md-12">
             <div class="card">
                 <div class="card-header">
-                    List of Products Offer
+                    List of Products
                 </div>
                 <div class="card-body">
                     <table class="table tbl-products-offer table-hover">
                         <thead class="bg-info text-white">
                             <th>#</th>
-                            <th>Category</th>
                             <th>Products</th>
+                            <th>Price</th>
                             <th>Status</th>
                             <th>Action</th>
                         </thead>
@@ -58,29 +66,33 @@
                                 $i = 1;
                                 $checked = $conn->query("
                                     SELECT 
-                                        r.room as products,
-                                        r.status as room_status,
-                                        rc.name as room_category
+                                        p.*,
+                                        c.name as category_name
                                     FROM 
-                                        rooms as r 
+                                        products as p 
                                     INNER JOIN 
-                                        room_categories as rc
+                                        categories as c
                                     ON 
-                                        r.category_id = rc.id
+                                        p.category_id = c.id
                                     ORDER BY 
-                                        r.id DESC
+                                        p.id DESC
                                 ");
 
                                 while( $row = $checked->fetch_assoc()):
                             ?>
                                 <tr>
-                                    <td><?php echo $i++ ?></td>
-                                    <td><?php echo $row['room_category'] ?></td>
-                                    <td><?php echo $row['products'] ?></td>
-                                    <td>
+                                    <td class="align-middle"><?php echo $i++ ?></td>
+                                    <td class="align-middle">
+                                        <?php echo $row['name'] ?>
                                         <?php 
-                                            echo $row['room_status'] == 0 ? '<span class="badge badge-success">Available</span>':'<span class="badge badge-secondary">Unavailable</span>';
+                                            if($row['description'] != '')
+                                            echo '<br/><br/><small class="text-muted">Description: '.$row['description'].'</small>'
                                         ?>
+                                        
+                                    </td>
+                                    <td class="align-middle">₱<?php echo $row['price'] ?></td>
+                                    <td class="align-middle">
+                                        <?php echo $row['status'] == 0 ? '<span class="badge badge-success">Available</span>':'<span class="badge badge-secondary">Not available</span>' ?>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary">Edit</button>

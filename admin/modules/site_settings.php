@@ -33,7 +33,7 @@
                 <textarea class="form-control" id="txt-editor"><?php echo isset($meta['about_content']) ? $meta['about_content'] : '' ?></textarea>
             </div>
             <div class="form-group mt-4">
-                <label for="">Image</label>
+                <label for="">Upload Image</label>
                 <input type="file" class="form-control" name="" id="" placeholder="">
             </div>
         </div>

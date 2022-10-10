@@ -21,10 +21,10 @@
   <?php include('components/navsidebar.php'); ?>
 
 <main class="content-wrapper content-main">
-  <?php include('modules/home.php'); ?>
-  <?php include('modules/booked.php'); ?>
-  <?php include('modules/reservation.php'); ?>
-  <?php include('modules/checkout.php')?>
+  <?php include('modules/dashboard.php'); ?>
+  <?php include('modules/customers.php'); ?>
+  <?php include('modules/appointment.php'); ?>
+  <?php include('modules/feedback.php')?>
   <?php include('modules/services_offer.php'); ?>
   <?php include('modules/products_offer.php'); ?>
   <?php include('modules/users.php'); ?>
