@@ -41,8 +41,7 @@
                     <td><?php echo $row['ref_no'] ?></td>
                         <td><span class="badge badge-warning">Booked</span></td>
                     <td>
-                        <button class="btn btn-sm btn-primary" type="button">View</button>
-                        <button class="btn btn-sm btn-primary" type="button">Edit</button>
+                        <button class="btn btn-sm btn-primary" id="btn_view_booked" data-id="<?php echo $row['checked_id'] ?>" type="button">View</button>
                     </td>
                 </tr>
             <?php endwhile; ?>

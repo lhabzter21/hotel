@@ -8,6 +8,9 @@
 <script src="lib/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- Date Picker -->
+<script src="lib/daterangepicker-master/moment.min.js"></script>
+<script src="lib/daterangepicker-master/daterangepicker.js"></script>
 <!-- Fontawesome -->
 <script src="lib/fontawesome/js/all.min.js"></script>
 <script src="ext/js/script.js"></script>

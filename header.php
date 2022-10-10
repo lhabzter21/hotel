@@ -10,6 +10,8 @@
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Fontawesome -->
 <link href="lib/fontawesome/css/all.min.css" rel="stylesheet" />
+<!-- Date Picker -->
+<link href="lib/daterangepicker-master/daterangepicker.css" rel="stylesheet" />
 <!-- Reset CSS -->
 <link href="ext/css/reset.css" rel="stylesheet" />
 <!-- Pages -->
