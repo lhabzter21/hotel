@@ -2,57 +2,40 @@
 <html lang="en">
 
 <?php include('components/header.php');?>
+<link href="../ext/css/admin.css" rel="stylesheet" />
 
-<style>
-    .card-custom { margin-top: 5vh;}
+<!-- init DB connection for all the pages -->
+<?php include('db_connect.php'); ?>
 
-    .banner { display: none; }
+<?php
+  if(!isset($_SESSION['login_id'])) {
+    header("Location: login.php");
+  } else {
+    // redirect customer login
+    if($_SESSION['login_type'] == 3)
+    header("Location: ../index.php");
+  }
+?>
 
-    @media (min-width: 768px) { 
-        .card-custom { margin-top: 10vh; }
-        .banner {  display: block; }
-        body { overflow: scroll; }
-    }
 
-    body { overflow: hidden !important; }
-
-    input.form-control, select.form-control, textarea.form-control {
-        margin-top: 6px !important;
-        margin-bottom: 20px !important;
-    }
-</style>
 
 <body>
-    <div class="row">
-        <div class="col-md-7 banner">
-            <img src="../ext/img/1664437680_treatment 2.jpg" class="img-fluid" alt="banner">
-        </div>
-        <div class="col-md-5 col-sm-12">
-            <div class="container">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h2 class="text-primary">Login</h2>
-                        <hr class="mb-5"/>
-                        <div class="form-group">
-                            <label for="">Username</label>
-                            <input type="text" name="username" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Password</label>
-                            <input type="text" name="password" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        </div>
+  <?php include('components/navsidebar.php'); ?>
 
-                        <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>
-                    
-                        <hr class="my-4"/>
+<main class="content-wrapper content-main">
+  <?php include('modules/home.php'); ?>
+  <?php include('modules/booked.php'); ?>
+  <?php include('modules/reservation.php'); ?>
+  <?php include('modules/checkout.php')?>
+  <?php include('modules/services_offer.php'); ?>
+  <?php include('modules/products_offer.php'); ?>
+  <?php include('modules/users.php'); ?>
+  <?php include('modules/site_settings.php'); ?>
+</main>
 
-                        Don't have an account? <a href="signup.php"class="btn btn-outline-success">Sign Up</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
+
 <?php include('components/footer.php');?>
+<script src="../ext/js/main.js"></script>
 
 </html>

@@ -48,6 +48,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="">Username <span class="text-danger">*</span></label>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="validation_username">
+                                <div id="validation_username" class="invalid-feedback">
+                                    Please provide a Username.
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="">Password <span class="text-danger">*</span></label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="validation_password">
                                 <div id="validation_password" class="invalid-feedback">

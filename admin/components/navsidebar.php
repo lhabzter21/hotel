@@ -36,19 +36,22 @@
                     <i class="fa-solid fa-bed mr-2"></i> <span>Products Offer</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa-solid fa-user mr-2"></i> <span>Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa-solid fa-gear mr-2"></i> <span>Site Settings</span>
-                </a>
-            </li>
+
+            <?php if($_SESSION['login_type'] == 1){?>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-user mr-2"></i> <span>Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-gear mr-2"></i> <span>Site Settings</span>
+                    </a>
+                </li>
+            <?php }?>
         </ul>
         <form class="form-inline ml-auto mt-2 mt-md-0">
-            <button class="btn btn-link my-2 my-sm-0 text-white">Username</button>
+            <a href="ajax.php?action=logout" class="btn btn-link my-2 my-sm-0 text-white"><?php echo @$_SESSION['login_name'] ?> <i class="fa fa-power-off"></i></a>
         </form>
   </div>
 

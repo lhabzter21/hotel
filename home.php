@@ -36,5 +36,3 @@
         <span class="sr-only">Next</span>
     </button>
 </div>
-
-<h1>Home</h1>

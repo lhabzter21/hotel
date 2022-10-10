@@ -1,8 +1,19 @@
+<?php
+    session_start();
+    include('db_connect.php');
+    $query = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
+    foreach ($query as $key => $value) {
+        if(!is_numeric($key))
+            $_SESSION['setting_'.$key] = $value;
+    }
+?>
+
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title><?php echo isset($_SESSION['setting_hotel_name']) ? $_SESSION['setting_hotel_name']:'Company' ?></title>
+<title><?php echo isset($_SESSION['setting_hotel_name']) ? $_SESSION['setting_hotel_name']:'Company Name' ?></title>
 <!-- Favicon-->
 <!-- <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" /> -->
 
