@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Executive Facial System</a>
+    <a class="navbar-brand" href="../index.php"><?php echo isset($_SESSION['setting_hotel_name']) ? $_SESSION['setting_hotel_name']:'Company Name' ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,22 +8,22 @@
         <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fa-solid fa-house mr-2"></i> <span>Home</span>
+                    <i class="fa-solid fa-house mr-2"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fa-solid fa-book mr-2"></i> <span>Booked</span> 
+                    <i class="fa-solid fa-users mr-2"></i> <span>Customers</span> 
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fa-solid fa-key mr-2"></i> <span>Reservation</span>
+                    <i class="fa-solid fa-calendar mr-2"></i> <span>Appointment</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fa-solid fa-right-to-bracket mr-2"></i> <span>Check Out</span>
+                    <i class="fa-solid fa-rss mr-2"></i> <span>Feedbacks</span>
                 </a>
             </li>
             <li class="nav-item">

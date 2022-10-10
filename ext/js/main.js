@@ -33,44 +33,6 @@ if($("#booked_graph")) {
     });
 }
 
-$("#btn_view_booked").click(function() {
-    let id = $(this).data('id');
-    uni_modal('Booked Details', 'modules/modal/booked_modal_view.php?id='+id)
-})
-
-$(document).on('click', '#btn_booked_checkout', function() {
-    let id = $(this).data('id1')
-    let rid = $(this).data('id2')
-    $.ajax({
-        url:'ajax.php?action=save_checkout',
-        method:'POST',
-        data:{
-            id: id,
-            rid: rid
-        },
-        success:function(res){
-            if(res ==1){
-                location.reload()
-            }
-        }
-    })
-})
-
-$(document).on('click','#btn_booked_update', function() {
-    let frm = $(this).parent().parent().find('form').serialize()
-
-    $.ajax({
-        url:'ajax.php?action=save_check_in',
-        method:'POST',
-        data: frm,
-        success:function(resp){
-            if(resp > 0 ){
-                location.reload()
-            }
-        }
-    })
-})
-
 // set an active page
 $(".nav-item a").click(function(){
     let nav_item_name = $(this).text().trim()
@@ -89,16 +51,16 @@ function activePage() {
     })
 
     switch(active_page) {
-        case "Home": 
+        case "Dashboard": 
             $("#home_content").removeClass('content-body-custom');
             break;
-        case "Booked": 
+        case "Customers": 
             $("#booked_content").removeClass('content-body-custom');
             break;
-        case "Reservation": 
+        case "Appointment": 
             $("#reservation_content").removeClass('content-body-custom');
             break;
-        case "Check Out": 
+        case "Feedbacks": 
             $("#checkout_content").removeClass('content-body-custom');
             break;
         case "Services Offer": 
@@ -156,18 +118,18 @@ window.uni_modal = function(title = '' , url=''){
 $(document).ready(function(){
     // default page
     if(sessionStorage.getItem('active_page') == null) {
-    sessionStorage.setItem('active_page', 'Home');
-    navItemActive('Home');
+    sessionStorage.setItem('active_page', 'Dashboard');
+    navItemActive('Dashboard');
     }
     activePage();
 
     // initialize datatables
     // Reference: https://datatables.net/reference/option/dom
-    $('.tbl-booked').dataTable({"dom": "frtip"});
-    $('.tbl-reservation').dataTable({"dom": "frtip"});
-    $('.tbl-checkout').dataTable({"dom": "frtip"});
-    $('.tbl-products-offer').dataTable({"dom": "tp"});
-    $('.tbl-services-offer').dataTable({"dom": "tp"});
+    $('.tbl-booked').dataTable({"dom": "frtip", "pageLength": 10});
+    $('.tbl-reservation').dataTable({"dom": "frtip", "pageLength": 10});
+    $('.tbl-checkout').dataTable({"dom": "frtip", "pageLength": 10});
+    $('.tbl-products-offer').dataTable({"dom": "tp", "pageLength": 5});
+    $('.tbl-services-offer').dataTable({"dom": "tp", "pageLength": 5});
     $('.tbl-users').dataTable({"dom": "frtip"});
 
     // initialize editor

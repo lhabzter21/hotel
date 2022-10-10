@@ -6,24 +6,24 @@
         <div class="col-lg-4 col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
-                    Services Form
+                    Service Form
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="">Service Offer</label>
+                        <label for="">Service Name <span class="text-danger">*</span></label>
                         <input type="text"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="">Price</label>
-                        <input type="text"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                        <label for="">Price (₱) <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="">Image</label>
+                        <label for="">Upload Image</label>
                         <input type="file"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-success">Add Record</button>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                                     SELECT 
                                         * 
                                     FROM 
-                                        room_categories 
+                                        services 
                                     ORDER BY 
                                         id DESC
                                 ");
@@ -60,8 +60,8 @@
                                     <td><?php echo $i++ ?></td>
                                     <td>
                                         <?php
-                                            if (file_exists('uploads/'.$row['cover_img']) && $row['cover_img'] != '') {
-                                                $src = 'uploads/'.$row['cover_img'];
+                                            if (file_exists('uploads/'.$row['img_path']) && $row['img_path'] != '') {
+                                                $src = 'uploads/'.$row['img_path'];
                                             } else {
                                                 $src = '../ext/img/img_placeholder.png';
                                             }

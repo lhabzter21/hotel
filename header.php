@@ -99,6 +99,13 @@ if (isset($path['query']) && !in_array(strtolower($path['query']), $clientPages)
                             } ?>">
                     <a class="nav-link my-navlink" href="index.php?page=about">About Us </a>
                 </li>
+                <?php if(isset($_SESSION['login_id'])){?>
+                    <?php if($_SESSION['login_type'] == 1 || $_SESSION['login_type'] == 2){?>
+                        <li class="nav-item">
+                            <a class="nav-link my-navlink" href="admin/index.php">Admin Panel</a>
+                        </li>
+                    <?php } ?>
+                <?php } ?>
                 <?php if(!isset($_SESSION['login_id'])){?>
                     <li class="<?php if ($params['page'] == "login") {
                                     echo "nav-item nav-active";

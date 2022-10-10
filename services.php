@@ -1,6 +1,6 @@
 <?php include('component/masthead.php'); ?>
 
-<section class="services-heading mt-5">
+<section class="services-heading my-5">
     <div class="container">
         <div class="heading">Heading</div>
         <div class="text">
@@ -8,70 +8,45 @@
         </div>
     </div>
 </section>
-<section class="services mt-5">
+
+<section class="services mt-5" style="background-color:#efefef;">
     <div class="container">
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="item" role="presentation">
-                <button class="nav-link active" id="pills-cat1-tab" data-toggle="pill" data-target="#pills-cat1" type="button" role="tab" aria-controls="pills-cat1" aria-selected="true">Category 1</button>
-            </li>
-            <li class="item" role="presentation">
-                <button class="nav-link" id="pills-cat2-tab" data-toggle="pill" data-target="#pills-cat2" type="button" role="tab" aria-controls="pills-cat2" aria-selected="false">Category 2</button>
-            </li>
-            <li class="item" role="presentation">
-                <button class="nav-link" id="pills-cat3-tab" data-toggle="pill" data-target="#pills-cat3" type="button" role="tab" aria-controls="pills-cat3" aria-selected="false">Category 3</button>
-            </li>
+            <?php 
+                $categories = $conn->query("SELECT * FROM categories");
+                while( $row = $categories->fetch_assoc()):
+            ?>
+                <li class="item" role="presentation">
+                    <button class="nav-link <?php echo $row['name'] == 'Face' ? 'active':''?>" id="pills-<?php echo $row['name']?>-tab" data-toggle="pill" data-target="#pills-<?php echo $row['name']?>" type="button" role="tab" aria-controls="pills-<?php echo $row['name']?>" aria-selected="true"><?php echo $row['name']?></button>
+                </li>
+
+            <?php endwhile; ?>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-cat1" role="tabpanel" aria-labelledby="pills-cat1-tab">
+            <?php 
+                $categories = $conn->query("SELECT * FROM categories");
+                while( $row = $categories->fetch_assoc()):
+            ?>
+
+            <div class="tab-pane fade show <?php echo $row['name'] == 'Face' ? 'active':''?>" id="pills-<?php echo $row['name']?>" role="tabpanel" aria-labelledby="pills-<?php echo $row['name']?>-tab">
                 <div class="content">
-                    <div class="items" data-title="Service 1" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
+                    <?php 
+                        $services = $conn->query("SELECT * FROM services WHERE category_id = ".$row['id']);
+                        while( $sub_row = $services->fetch_assoc()):
+                    ?>
 
-                    </div>
-                    <div class="items" data-title="Service 2" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=2') center/cover no-repeat">
+                        <div class="items" 
+                            data-title="<?php echo $sub_row['name']?>" 
+                            data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." 
+                            style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
+                        </div>
 
-                    </div>
-                    <div class="items" data-title="Service 3" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=5') center/cover no-repeat">
-
-                    </div>
-                    <div class="items" data-title="Service 4" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
-
-                    </div>
-                    <div class="items" data-title="Service 5" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=2') center/cover no-repeat">
-
-                    </div>
-                    <div class="items" data-title="Service 6" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=5') center/cover no-repeat">
-
-                    </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-cat2" role="tabpanel" aria-labelledby="pills-cat2-tab">
-                <div class="content">
-                    <div class="items" data-title="Service 1" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
 
-                    </div>
-                    <div class="items" data-title="Service 2" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=2') center/cover no-repeat">
-
-                    </div>
-                    <div class="items" data-title="Service 3" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=5') center/cover no-repeat">
-
-                    </div>
-                    <div class="items" data-title="Service 4" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="tab-pane fade" id="pills-cat3" role="tabpanel" aria-labelledby="pills-cat3-tab">
-                <div class="content">
-                    <div class="items" data-title="Service 1" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
-
-                    </div>
-                    <div class="items" data-title="Service 2" data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." style="background:url('https://picsum.photos/300/200?random=2') center/cover no-repeat">
-
-                    </div>
-                </div>
-            </div>
+            <?php endwhile; ?>
         </div>
     </div>
 </section>
