@@ -15,7 +15,7 @@
 <meta name="author" content="" />
 <title><?php echo isset($_SESSION['setting_hotel_name']) ? $_SESSION['setting_hotel_name']:'Company Name' ?></title>
 <!-- Favicon-->
-<!-- <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" /> -->
+<link rel="icon" type="image/x-icon" href="../ext/img/favicon.png" />
 
 <!-- Bootstrap -->
 <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
