@@ -1,6 +1,6 @@
 <footer class="bg-light py-5">
     <div class="container">
-        <div class="small text-center text-muted">Executive Facial Care system | 2022 </div>
+        <div class="small text-center text-muted"><?php echo isset($_SESSION['setting_hotel_name']) ? $_SESSION['setting_hotel_name']:'Company Name' ?> | 2022 </div>
     </div>
 </footer>
 

@@ -141,6 +141,7 @@ li.nav-item.nav-active {
 	border: 1px solid silver;
 	border-radius: 10px;
 	padding: 3em 1.5em;
+	background-color: white;
 }
 
 .btn-orange {
@@ -155,4 +156,16 @@ li.nav-item.nav-active {
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
     background-color: #F4623A;
+}
+
+.bg-light-gray {
+	background-color: #efefef !important;
+}
+
+.category-box {
+	background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat;
+	padding: 3em;
+	margin-bottom: 2em;
+	border-radius: 10px;
+	text-shadow: 0px 0px 19px #000000;
 }
