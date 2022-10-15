@@ -38,8 +38,8 @@
 
                         <div class="items" 
                             data-title="<?php echo $sub_row['name']?>" 
-                            data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc faucibus, scelerisque enim molestie, sagittis quam. Integer scelerisque lacinia dolor quis fermentum." 
-                            style="background:url('https://picsum.photos/300/200?random=3') center/cover no-repeat">
+                            data-text="<?php echo $sub_row['description'] == '' ? '':$sub_row['description']?>" 
+                            style="<?php echo $sub_row['img_path'] == '' ? "background:url('admin/uploads/img_placeholder.png') center/cover no-repeat":"background:url('admin/uploads/".$sub_row['img_path']."') center/cover no-repeat"?>">
                         </div>
 
                     <?php endwhile; ?>

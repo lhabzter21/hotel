@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fa-solid fa-bed mr-2"></i> <span>Products Offer</span>
+                    <i class="fa-solid fa-shopping-cart mr-2"></i> <span>Products Offer</span>
                 </a>
             </li>
 

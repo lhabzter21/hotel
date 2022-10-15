@@ -66,6 +66,44 @@ class Action {
         return 0;
     }
 
+	public function delete_appointment() {
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM appointments where id = ".$id);
+		if($delete)
+			return 1;
+	}
+
+	public function delete_services() {
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM services where id = ".$id);
+
+		// delete image
+		if(file_exists('uploads/'.$img)) {
+			unlink('uploads/'.$img);
+		} 
+
+		if($delete)
+			return 1;
+	}
+
+	public function add_services() {
+		extract($_POST);
+		$data = " name = '$name' ";
+		$data .= ", price = '$price' ";
+		$data .= ", category_id = '$category_id' ";
+		$data .= ", description = '$description' ";
+
+		if($_FILES['image']['tmp_name'] != ''){
+			$fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['image']['name'];
+			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/'. $fname);
+			$data .= ", img_path = '$fname' ";
+		}
+		
+		$this->db->query("INSERT INTO services set ".$data);
+
+		return 0;
+	}
+
 	public function add_appointment() {
 		extract($_POST);
 		$data = " customer_id = '$customer_id' ";

@@ -5,26 +5,50 @@
     <div class="row">
         <div class="col-lg-4 col-md-12 mb-3">
             <div class="card">
-                <div class="card-header">
-                    Service Form
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="">Service Name <span class="text-danger">*</span></label>
-                        <input type="text"  class="form-control" name="" aria-describedby="helpId" placeholder="">
+                <form id="frm_services_add">
+                    <div class="card-header">
+                        Service Form
                     </div>
-                    <div class="form-group">
-                        <label for="">Price (₱) <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="" aria-describedby="helpId" placeholder="">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="">Service Name <span class="text-danger">*</span></label>
+                            <input type="text"  class="form-control" name="name" required placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Category <span class="text-danger">*</span></label>
+                            <select name="category_id" class="form-control" required>
+                                <?php
+                                    $categories_qry = $conn->query("
+                                            SELECT 
+                                                *
+                                            FROM 
+                                                categories 
+                                            ORDER BY 
+                                                name ASC
+                                        ");
+                                    while( $row = $categories_qry->fetch_assoc()):
+                                ?> 
+                                    <option value="<?php echo $row['id']?>"><?php echo strtoupper($row['name'])?></option>
+                                <?php endwhile; ?>
+                            </select>
+                                </div>
+                        <div class="form-group">
+                            <label for="">Price (₱) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" name="price" required placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description <small class="text-muted">(Optional)</small></label>
+                            <textarea name="description" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Upload Image</label>
+                            <input type="file"  class="form-control" name="image" placeholder="" accept="image/x-png,image/gif,image/jpeg">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Upload Image</label>
-                        <input type="file"  class="form-control" name="" aria-describedby="helpId" placeholder="">
+                    <div class="card-footer">
+                        <button class="btn btn-success" type="submit">Add Record</button>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-success">Add Record</button>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -63,7 +87,7 @@
                                             if (file_exists('uploads/'.$row['img_path']) && $row['img_path'] != '') {
                                                 $src = 'uploads/'.$row['img_path'];
                                             } else {
-                                                $src = '../ext/img/img_placeholder.png';
+                                                $src = 'uploads/img_placeholder.png';
                                             }
                                         ?>
 
@@ -72,8 +96,8 @@
                                     <td><?php echo $row['name'] ?></td>
                                     <td>₱<?php echo $row['price'] ?></td>
                                     <td>
-                                        <button class="btn btn-primary">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="btn btn-primary btn-services-edit" data-id="<?php echo $row['id'] ?>" >Edit</button>
+                                        <button class="btn btn-danger btn-services-delete" data-id="<?php echo $row['id'] ?>" data-img="<?php echo $row['img_path'] ?>" >Delete</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
