@@ -51,6 +51,24 @@ $(".btn-edit-customer").click(function() {
     })
 })
 
+$(".btn-services-edit").click(function() {
+    let id = $(this).data('id')
+
+    $.ajax({
+        method: 'GET',
+        dataType: 'html',
+        url: 'modules/modal/services_modal_edit.php?services_id='+id,
+        success: function(res) {
+            $(".modal-title").text('Services Details')
+            $(".modal-body").html(res)
+            $("#modal").modal('show')
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
 $(".btn-edit-appointment").click(function() {
     let id = $(this).data('id')
 
@@ -107,7 +125,7 @@ $(".btn-add-appointment").click(function() {
 
 $(".btn-delete-customer").click(function() {
     let id = $(this).data('id')
-    swal("Are you sure you want to delete?", {
+    swal("Delete", "Are you sure you want to delete?", {
         buttons: {
           cancel: "Cancel",
           accept: "Yes, Im sure"
@@ -122,6 +140,80 @@ $(".btn-delete-customer").click(function() {
                 method: 'POST',
                 url: 'ajax.php?action=delete_customer',
                 data: {id:id},
+                success: function(res) {
+                    swal("Success!", "Successfully deleted!", "success");
+                    setTimeout(function() {
+                        location.reload();
+                    },1000)
+                },
+                error: function(res) {
+                    console.log(res)
+                }
+            })
+            
+            break;
+       
+          default:
+            // do nothing ..
+        }
+      });
+})
+
+$(".btn-delete-appointment").click(function() {
+    let id = $(this).data('id')
+    swal("Delete", "Are you sure you want to delete?", {
+        buttons: {
+          cancel: "Cancel",
+          accept: "Yes, Im sure"
+        },
+      })
+      .then((value) => {
+        switch (value) {
+        
+          case "accept":
+
+            $.ajax({
+                method: 'POST',
+                url: 'ajax.php?action=delete_appointment',
+                data: {id:id},
+                success: function(res) {
+                    swal("Success!", "Successfully deleted!", "success");
+                    setTimeout(function() {
+                        location.reload();
+                    },1000)
+                },
+                error: function(res) {
+                    console.log(res)
+                }
+            })
+            
+            break;
+       
+          default:
+            // do nothing ..
+        }
+      });
+})
+
+$(".btn-services-delete").click(function() {
+    let id = $(this).data('id');
+    let img = $(this).data('img');
+
+    swal("Delete", "Are you sure you want to delete?", {
+        buttons: {
+          cancel: "Cancel",
+          accept: "Yes, Im sure"
+        },
+      })
+      .then((value) => {
+        switch (value) {
+        
+          case "accept":
+
+            $.ajax({
+                method: 'POST',
+                url: 'ajax.php?action=delete_services',
+                data: {id:id, img:img},
                 success: function(res) {
                     swal("Success!", "Successfully deleted!", "success");
                     setTimeout(function() {
@@ -207,6 +299,28 @@ $(document).on('submit', '#frm_appointment_edit', function(e) {
         data: $(this).serialize(),
         success: function(res) {
             swal("Success!", "Successfully Updated!", "success");
+            setTimeout(function() {
+                location.reload();
+            },1000)
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(document).on('submit', '#frm_services_add', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: 'ajax.php?action=add_services',
+        data: new FormData($(this)[0]),
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(res) {
+            swal("Success!", "Successfully Added!", "success");
             setTimeout(function() {
                 location.reload();
             },1000)

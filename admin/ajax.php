@@ -45,3 +45,21 @@ if($action == 'update_appointment'){
 	if($res)
 	echo $res;
 }
+
+if($action == 'delete_appointment'){
+	$res = $crud->delete_appointment();
+	if($res)
+	echo $res;
+}
+
+if($action == 'add_services'){
+	$res = $crud->add_services();
+	if($res)
+	echo $res;
+}
+
+if($action == 'delete_services'){
+	$res = $crud->delete_services();
+	if($res)
+	echo $res;
+}
