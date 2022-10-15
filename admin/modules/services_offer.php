@@ -11,15 +11,15 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="">Service Name <span class="text-danger">*</span></label>
-                        <input type="text"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text"  class="form-control" name="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="">Price (₱) <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" class="form-control" name="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="">Upload Image</label>
-                        <input type="file"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                        <input type="file"  class="form-control" name="" aria-describedby="helpId" placeholder="">
                     </div>
                 </div>
                 <div class="card-footer">

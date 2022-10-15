@@ -18,15 +18,15 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="">Hotel Name</label>
-                <input type="text" class="form-control" name="" id="" value="<?php echo isset($meta['hotel_name']) ? $meta['hotel_name'] : '' ?>" placeholder="">
+                <input type="text" class="form-control" name="hotel_name" id="hotel_name" value="<?php echo isset($meta['hotel_name']) ? $meta['hotel_name'] : '' ?>" placeholder="">
             </div>
             <div class="form-group">
                 <label for="">Hotel Email</label>
-                <input type="text" class="form-control" name="" id="" value="<?php echo isset($meta['email']) ? $meta['email'] : '' ?>" placeholder="">
+                <input type="text" class="form-control" name="email" id="email" value="<?php echo isset($meta['email']) ? $meta['email'] : '' ?>" placeholder="">
             </div>
             <div class="form-group">
                 <label for="">Hotel Contact</label>
-                <input type="text" class="form-control" name="" id="" value="<?php echo isset($meta['contact']) ? $meta['contact'] : '' ?>" placeholder="">
+                <input type="text" class="form-control" name="contact" id="contact" value="<?php echo isset($meta['contact']) ? $meta['contact'] : '' ?>" placeholder="">
             </div>
             <div class="form-group">
                 <label for="" class="mb-2">Hotel About Content</label>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group mt-4">
                 <label for="">Upload Image</label>
-                <input type="file" class="form-control" name="" id="" placeholder="">
+                <input type="file" class="form-control" name="cover_img" placeholder="">
             </div>
         </div>
         <div class="card-footer">
