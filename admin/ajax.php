@@ -21,3 +21,27 @@ if($action == 'logout'){
 	if($logout)
 	echo $logout;
 }
+
+if($action == 'update_customer'){
+	$res = $crud->update_customer();
+	if($res)
+	echo $res;
+}
+
+if($action == 'delete_customer'){
+	$res = $crud->delete_customer();
+	if($res)
+	echo $res;
+}
+
+if($action == 'add_appointment'){
+	$res = $crud->add_appointment();
+	if($res)
+	echo $res;
+}
+
+if($action == 'update_appointment'){
+	$res = $crud->update_appointment();
+	if($res)
+	echo $res;
+}

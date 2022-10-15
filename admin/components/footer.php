@@ -8,6 +8,8 @@
 <script src="../lib/notify/notify.min.js"></script>
 <!-- DataTables -->
 <script src="../lib/DataTables/datatables.min.js"></script>
+<!-- DataTables -->
+<script src="../lib/sweetalert/sweetalert.min.js"></script>
 
 <!-- ChartJS -->
 <script src="https://code.highcharts.com/highcharts.js"></script>

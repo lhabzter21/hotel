@@ -33,6 +33,190 @@ if($("#booked_graph")) {
     });
 }
 
+$(".btn-edit-customer").click(function() {
+    let id = $(this).data('id')
+
+    $.ajax({
+        method: 'GET',
+        dataType: 'html',
+        url: 'modules/modal/customers_modal_edit.php?customer_id='+id,
+        success: function(res) {
+            $(".modal-title").text('Customer Details')
+            $(".modal-body").html(res)
+            $("#modal").modal('show')
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(".btn-edit-appointment").click(function() {
+    let id = $(this).data('id')
+
+    $.ajax({
+        method: 'GET',
+        dataType: 'html',
+        url: 'modules/modal/appointment_modal_edit.php?appointment_id='+id,
+        success: function(res) {
+            $(".modal-title").text('Edit Appointment Details')
+            $(".modal-body").html(res)
+            $("#modal").modal('show')
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(".btn-add-customer").click(function() {
+    let id = $(this).data('id')
+
+    $.ajax({
+        method: 'GET',
+        dataType: 'html',
+        url: 'modules/modal/customers_modal_add.php',
+        success: function(res) {
+            $(".modal-title").text('Add New Customer')
+            $(".modal-body").html(res)
+            $("#modal").modal('show')
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(".btn-add-appointment").click(function() {
+    let id = $(this).data('id')
+
+    $.ajax({
+        method: 'GET',
+        dataType: 'html',
+        url: 'modules/modal/appointment_modal_add.php',
+        success: function(res) {
+            $(".modal-title").text('Add New Appointment')
+            $(".modal-body").html(res)
+            $("#modal").modal('show')
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(".btn-delete-customer").click(function() {
+    let id = $(this).data('id')
+    swal("Are you sure you want to delete?", {
+        buttons: {
+          cancel: "Cancel",
+          accept: "Yes, Im sure"
+        },
+      })
+      .then((value) => {
+        switch (value) {
+        
+          case "accept":
+
+            $.ajax({
+                method: 'POST',
+                url: 'ajax.php?action=delete_customer',
+                data: {id:id},
+                success: function(res) {
+                    swal("Success!", "Successfully deleted!", "success");
+                    setTimeout(function() {
+                        location.reload();
+                    },1000)
+                },
+                error: function(res) {
+                    console.log(res)
+                }
+            })
+            
+            break;
+       
+          default:
+            // do nothing ..
+        }
+      });
+})
+
+$(document).on('submit', '#frm_customer', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: 'ajax.php?action=update_customer',
+        data: $(this).serialize(),
+        success: function(res) {
+            swal("Success!", "Successfully Updated!", "success");
+            setTimeout(function() {
+                location.reload();
+            },1000)
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(document).on('submit', '#frm_customer_add', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: 'ajax.php?action=register',
+        data: $(this).serialize(),
+        success: function(res) {
+            swal("Success!", "Successfully Added!", "success");
+            setTimeout(function() {
+                location.reload();
+            },1000)
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(document).on('submit', '#frm_appointment_add', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: 'ajax.php?action=add_appointment',
+        data: $(this).serialize(),
+        success: function(res) {
+            swal("Success!", "Successfully Added!", "success");
+            setTimeout(function() {
+                location.reload();
+            },1000)
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
+$(document).on('submit', '#frm_appointment_edit', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: 'ajax.php?action=update_appointment',
+        data: $(this).serialize(),
+        success: function(res) {
+            swal("Success!", "Successfully Updated!", "success");
+            setTimeout(function() {
+                location.reload();
+            },1000)
+        },
+        error: function(res) {
+            console.log(res)
+        }
+    })
+})
+
 // set an active page
 $(".nav-item a").click(function(){
     let nav_item_name = $(this).text().trim()

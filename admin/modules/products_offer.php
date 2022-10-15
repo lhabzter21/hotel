@@ -11,19 +11,19 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="">Product Name <span class="text-danger">*</span></label>
-                        <input type="text"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text"  class="form-control" name="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="">Price (₱) <span class="text-danger">*</span></label>
-                        <input type="number"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number"  class="form-control" name="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="">Description</label>
-                        <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="" cols="30" rows="5"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Category <span class="text-danger">*</span></label>
-                        <select name="" id="" class="form-control">
+                        <select name="" class="form-control">
                             <?php
                                 $cat = $conn->query("SELECT * FROM categories order by name asc ");
                                 while($row= $cat->fetch_assoc()) {
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Availability <span class="text-danger">*</span></label>
-                        <select class="form-control" name="" id="">
+                        <select class="form-control" name="">
                             <option value="0">Available</option>
 						    <option value="1">Unavailable</option>
                         </select>

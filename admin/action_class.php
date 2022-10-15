@@ -50,6 +50,53 @@ class Action {
 		}
 	}
 
+    public function update_customer() {
+        extract($_POST);
+		$data = " first_name = '$first_name' ";
+		$data .= ", last_name = '$last_name' ";
+		$data .= ", password = '$password' ";
+		$data .= ", contact_num = '$contact_num' ";
+		$data .= ", address = '$address' ";
+		$data .= ", email = '$email' ";
+		$data .= ", username = '$username' ";
+		$data .= ", gender = '$gender' ";
+		
+		$this->db->query("UPDATE customers set ".$data." WHERE id=".$id);
+
+        return 0;
+    }
+
+	public function add_appointment() {
+		extract($_POST);
+		$data = " customer_id = '$customer_id' ";
+		$data .= ", services_id = '$services_id' ";
+		$data .= ", appointment_date = '$appointment_date' ";
+		$data .= ", from_time = '$from_time' ";
+		$data .= ", to_time = '$to_time' ";
+		
+		$this->db->query("INSERT INTO appointments set ".$data);
+	}
+
+	public function update_appointment() {
+		extract($_POST);
+		$data = " customer_id = '$customer_id' ";
+		$data .= ", services_id = '$services_id' ";
+		$data .= ", appointment_date = '$appointment_date' ";
+		$data .= ", from_time = '$from_time' ";
+		$data .= ", to_time = '$to_time' ";
+		$data .= ", status = '$status' ";
+		
+		$this->db->query("UPDATE appointments set ".$data." WHERE id=$id");
+	}
+
+	public function delete_customer() {
+        extract($_POST);
+		$date_today = date('Y-m-d H:i:s');
+		$this->db->query("UPDATE customers set `deleted_at` = '$date_today' WHERE id=$id");
+
+        return 0;
+    }
+
     function logout(){
 		session_destroy();
 		foreach ($_SESSION as $key => $value) {
@@ -78,6 +125,8 @@ class Action {
 		$data .= ", email = '$email' ";
 		$data .= ", username = '$username' ";
 		$data .= ", gender = '$gender' ";
+		
+			
 		
 		$this->db->query("INSERT INTO customers set ".$data);
 		
