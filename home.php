@@ -57,6 +57,26 @@
 
                             <label for="" class="mb-2">To</label>
                             <input type="time" min="09:00" max="18:00" name="to_time" class="form-control" required>
+
+                            <br/>
+
+                            <label for="" class="mb-2">Services</label>
+                            <select name="services_id" class="form-control" required>
+                                <option value=""></option>
+                                <?php
+                                    $qry_appointment_services = $conn->query("
+                                            SELECT 
+                                                *
+                                            FROM 
+                                                services 
+                                            ORDER BY 
+                                                name ASC
+                                        ");
+                                    while( $row = $qry_appointment_services->fetch_assoc()):
+                                ?> 
+                                    <option value="<?php echo $row['id']?>"><?php echo strtoupper($row['name'])?></option>
+                                <?php endwhile; ?>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label for="" class="mb-2">&nbsp;</label>

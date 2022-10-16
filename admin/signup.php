@@ -105,8 +105,10 @@
                 if(res == 1) {
                     swal("Success!", "Successfully Registered!", "success");
                     setTimeout(function() {
-                        location.reload();
+                        location.href ='login.php';
                     },1000)
+                } else if(res == 3) {
+                    swal("Sorry!", "Must be image!", "error");
                 } else {
                     swal("Invalid!", "Username already exist!", "error");
                 }

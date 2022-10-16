@@ -33,7 +33,7 @@ class Action {
 				return 2;
 		}else{
             // client login
-			$qry2 = $this->db->query("SELECT * FROM customers where username = '".$username."' and password = '".$password."' ");
+			$qry2 = $this->db->query("SELECT * FROM customers where username = '".$username."' and password = '".$password."' AND deleted_at IS NULL");
 
             if($qry2->num_rows > 0){
                 $extract = $qry2->fetch_array();
@@ -74,6 +74,16 @@ class Action {
 				unlink('uploads/profiles/'.$profile_img);
 			} 
 
+			// check if image type
+			$image_name = $_FILES['image']['name'];
+			$allowed_extensions = array("png", "jpg", "jpeg");
+			$image_extension = explode(".", $image_name);
+
+			$extension = end($image_extension);
+			if(!in_array($extension, $allowed_extensions)){
+				return 3;
+			}
+
 			$img_name = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
 			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/profiles/'. $img_name);
 			$data .= ", profile_img = '$img_name' ";
@@ -108,6 +118,16 @@ class Action {
 				unlink('uploads/cover_photo/'.$img);
 			} 
 
+			// check if image type
+			$image_name = $_FILES['image']['name'];
+			$allowed_extensions = array("png", "jpg", "jpeg");
+			$image_extension = explode(".", $image_name);
+
+			$extension = end($image_extension);
+			if(!in_array($extension, $allowed_extensions)){
+				return 2;
+			}
+
 			$fname = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
 			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/cover_photo/'. $fname);
 			$data .= ", cover_img = '$fname' ";
@@ -115,7 +135,7 @@ class Action {
 		
 		$this->db->query("UPDATE system_settings set ".$data." WHERE id=$id");
 
-		return 0;
+		return 1;
 	}
 
 	public function delete_appointment() {
@@ -148,6 +168,16 @@ class Action {
 				unlink('uploads/'.$img);
 			} 
 
+			// check if image type
+			$image_name = $_FILES['image']['name'];
+			$allowed_extensions = array("png", "jpg", "jpeg");
+			$image_extension = explode(".", $image_name);
+
+			$extension = end($image_extension);
+			if(!in_array($extension, $allowed_extensions)){
+				return 2;
+			}
+
 			$fname = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
 			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/'. $fname);
 			$data .= ", img_path = '$fname' ";
@@ -155,7 +185,7 @@ class Action {
 		
 		$this->db->query("UPDATE services set ".$data." WHERE id=$id");
 
-		return 0;
+		return 1;
 	}
 
 	public function add_services() {
@@ -166,6 +196,17 @@ class Action {
 		$data .= ", description = '$description' ";
 
 		if($_FILES['image']['tmp_name'] != ''){
+
+			// check if image type
+			$image_name = $_FILES['image']['name'];
+			$allowed_extensions = array("png", "jpg", "jpeg");
+			$image_extension = explode(".", $image_name);
+
+			$extension = end($image_extension);
+			if(!in_array($extension, $allowed_extensions)){
+				return 2;
+			}
+
 			$fname = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
 			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/'. $fname);
 			$data .= ", img_path = '$fname' ";
@@ -173,7 +214,7 @@ class Action {
 		
 		$this->db->query("INSERT INTO services set ".$data);
 
-		return 0;
+		return 1;
 	}
 
 	public function add_appointment() {
@@ -343,6 +384,17 @@ class Action {
 		$data .= ", gender = '$gender' ";
 
 		if($_FILES['image']['tmp_name'] != ''){
+
+			// check if image type
+			$image_name = $_FILES['image']['name'];
+			$allowed_extensions = array("png", "jpg", "jpeg");
+			$image_extension = explode(".", $image_name);
+
+			$extension = end($image_extension);
+			if(!in_array($extension, $allowed_extensions)){
+				return 3;
+			}
+
 			$img_name = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
 			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/profiles/'. $img_name);
 			$data .= ", profile_img = '$img_name' ";
