@@ -13,4 +13,8 @@
 <script src="lib/daterangepicker-master/daterangepicker.js"></script>
 <!-- Fontawesome -->
 <script src="lib/fontawesome/js/all.min.js"></script>
+
+<!-- Sweet Alert -->
+<script src="lib/sweetalert/sweetalert.min.js"></script>
+
 <script src="ext/js/script.js"></script>

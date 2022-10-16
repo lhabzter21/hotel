@@ -9,12 +9,12 @@
 ?>
 <form id="frm_appointment_edit">
     <div class="modal-body">
-        <input type="hidden" name="id" id="appointment_id" value="<?php echo $meta['id'] ?>">
+        <input type="hidden" name="id" value="<?php echo $meta['id'] ?>">
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="">Select Customer</label>
-                    <select name="customer_id" id="appointment_customer_id" class="form-control" required>
+                    <select name="customer_id" class="form-control" required>
                         <option value=""></option>
                         <?php
                             $qry_appointment_customer = $conn->query("
@@ -24,6 +24,8 @@
                                         last_name
                                     FROM 
                                         customers 
+                                    WHERE 
+                                        deleted_at IS NULL
                                     ORDER BY 
                                         first_name ASC
                                 ");
@@ -43,19 +45,19 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="">From</label>
-                    <input type="time" class="form-control" name="from_time" id="appointment_time1" value="<?php echo $meta['from_time'] ?>" required placeholder="">
+                    <input type="time" class="form-control" name="from_time" min="09:00" max="18:00" value="<?php echo $meta['from_time'] ?>" required placeholder="">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="">To</label>
-                    <input type="time" class="form-control" name="to_time" id="appointment_time2" value="<?php echo $meta['to_time'] ?>" required placeholder="">
+                    <input type="time" class="form-control" name="to_time" min="09:00" max="18:00" value="<?php echo $meta['to_time'] ?>" required placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="">Services</label>
-                    <select name="services_id" id="appointment_services" class="form-control" required>
+                    <select name="services_id" class="form-control" required>
                         <?php
                             $qry_appointment_services = $conn->query("
                                     SELECT 
@@ -75,7 +77,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="">Status</label>
-                    <select class="form-control" name="status" id="appointment_status">
+                    <select class="form-control" name="status">
                         <option value="0" <?php echo $meta['status'] == '0' ? 'selected':'' ?>>Pending</option>
                         <option value="1" <?php echo $meta['status'] == '1' ? 'selected':'' ?>>On going</option>
                         <option value="2" <?php echo $meta['status'] == '2' ? 'selected':'' ?>>Done</option>

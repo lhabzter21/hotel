@@ -32,70 +32,50 @@
                         <h2 class="text-primary">Registration</h2>
                         <hr class="mb-5"/>
 
-                        <form id="reg_form">
+                        <form id="frm_signup_add">
                             <div class="form-group">
                                 <label for="">First Name <span class="text-danger">*</span></label>
-                                <input type="text" name="fname" id="fname" class="form-control" placeholder="" aria-describedby="validation_fname">
-                                <div id="validation_fname" class="invalid-feedback">
-                                    Please provide a first name.
-                                </div>
+                                <input type="text" name="fname" onkeypress="return /[a-z]/i.test(event.key)" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Last name <span class="text-danger">*</span></label>
-                                <input type="text" name="lname" id="lname" class="form-control" placeholder="" aria-describedby="validation_lname">
-                                <div id="validation_lname" class="invalid-feedback">
-                                    Please provide a last name.
-                                </div>
+                                <input type="text" name="lname" onkeypress="return /[a-z]/i.test(event.key)" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Username <span class="text-danger">*</span></label>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="validation_username">
-                                <div id="validation_username" class="invalid-feedback">
-                                    Please provide a Username.
-                                </div>
+                                <input type="text" name="username" minlength="4" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Password <span class="text-danger">*</span></label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="validation_password">
-                                <div id="validation_password" class="invalid-feedback">
-                                    Please provide a password.
-                                </div>
+                                <input type="password" name="password" minlength="6" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Contact Number <span class="text-danger">*</span></label>
-                                <input type="number" name="contact_num" id="contact_num" class="form-control" placeholder="" aria-describedby="validation_contact_num">
-                                <div id="validation_contact_num" class="invalid-feedback">
-                                    Please provide a Contact number.
-                                </div>
+                                <input type="number" name="contact_num" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Email <span class="text-danger">*</span></label>
-                                <input type="text" name="email" id="email" class="form-control" placeholder="" aria-describedby="validation_email">
-                                <div id="validation_email" class="invalid-feedback">
-                                    Please provide an email address.
-                                </div>
+                                <input type="text" name="email" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Gender <span class="text-danger">*</span></label>
-                                <select name="gender" class="form-control" id="gender" aria-describedby="validation_gender">
+                                <select name="gender" class="form-control" required>
                                     <option value=""></option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
-                                <div id="validation_gender" class="invalid-feedback">
-                                    Please provide an gender.
-                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Upload Profile image <span class="text-danger">*</span></label>
+                                <input type="file" name="image" class="form-control" accept="image/x-png,image/gif,image/jpeg" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Address <span class="text-danger">*</span></label>
-                                <textarea name="address" id="address" class="form-control" cols="30" rows="10" aria-describedby="validation_address"></textarea>
-                                <div id="validation_address" class="invalid-feedback">
-                                    Please provide an address.
-                                </div>
+                                <textarea name="address" class="form-control" required cols="30" rows="10"></textarea>
                             </div>
                             
 
-                            <button type="button" id="btnRegister" class="btn btn-success btn-block mt-5">Register</button>
+                            <button type="submit" class="btn btn-success btn-block mt-5">Register</button>
                         </form>
                         
                         <hr class="my-4"/>
@@ -111,64 +91,32 @@
 
 <script>
 
-    function validateEmail(input) {
-        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        return input.value.match(validRegex) ? true:false;
-    }
-
-    $("#btnRegister").click(function(){
-
-
-        if($("#email").val() != '') {
-            let chk = !validateEmail(document.getElementById('email'));
-
-            console.log(chk)
-            if(chk) {
-                $("#email").addClass('is-invalid')
-                $("#validation_email").text('Invalid email')
-                return false;
-            }
-        }
+    $(document).on('submit', '#frm_signup_add', function(e) {
+        e.preventDefault();
 
         $.ajax({
-			url:'ajax.php?action=register',
-			method:'POST',
-			data:$("#reg_form").serialize(),
-			error:err=>{
-				console.log(err)
-
-			},
-			success:function(res){
-				let response = JSON.parse(res);
-
-                // if missing data response
-                if(response.success === 0) {
-                    let errors = response.data;
-
-                    // remove css 'is-invalid'
-                    $("#reg_form").find('.form-control').each(function(){
-                        $(this).removeClass('is-invalid');
-                    })
-
-                    for(let i = 0; i < errors.length; i++) {
-                        $("#"+ errors[i]).addClass('is-invalid')
-                    }
+            method: 'POST',
+            url: 'ajax.php?action=register',
+            data: new FormData($(this)[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(res) {
+                if(res == 1) {
+                    swal("Success!", "Successfully Registered!", "success");
+                    setTimeout(function() {
+                        location.reload();
+                    },1000)
+                } else {
+                    swal("Invalid!", "Username already exist!", "error");
                 }
-
-                // if no data missing response
-                if(response.success === 1) {
-
-                    // remove css 'is-invalid' and clear inputs
-                    $("#reg_form").find('.form-control').each(function(){
-                        $(this).removeClass('is-invalid');
-                        $(this).val('');
-                    })
-
-                    $.notify('Successfully Created', 'success');
-                }
-			}
-		})
+            },
+            error: function(res) {
+                console.log(res)
+            }
+        })
     })
+
 </script>
 
 </html>

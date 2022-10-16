@@ -9,11 +9,10 @@
     <table class="table tbl-booked table-hover">
         <thead class="bg-info text-white">
             <th>#</th>
+            <th>Profile</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Username</th>
-            <th>Contact No.</th>
-            <th>Email</th>
             <th>Date Registered</th>
             <th>Action</th>
         </thead>
@@ -34,15 +33,24 @@
             ?>
                 <tr>
                     <td><?php echo $i++ ?></td>
+                    <td>
+                        <?php
+                            if (file_exists('uploads/profiles/'.$row['profile_img']) && $row['profile_img'] != '') {
+                                $src = 'uploads/profiles/'.$row['profile_img'];
+                            } else {
+                                $src = 'uploads/img_placeholder.png';
+                            }
+                        ?>
+
+                        <img class="img-fluid img-custom"  src="<?php echo $src;?>" alt="image">
+                    </td>
                     <td><?php echo $row['first_name'] ?></td>
                     <td><?php echo $row['last_name'] ?></td>
                     <td><?php echo $row['username'] ?></td>
-                    <td><?php echo $row['contact_num'] ?></td>
-                    <td><?php echo $row['email'] ?></td>
                     <td><?php echo $row['created_at'] ?></td>
                     <td>
                         <button class="btn btn-sm btn-primary btn-edit-customer" data-id="<?php echo $row['id']?>">Edit</button>
-                        <button class="btn btn-sm btn-danger btn-delete-customer" data-id="<?php echo $row['id']?>">Delete</button>
+                        <button class="btn btn-sm btn-danger btn-delete-customer" data-id="<?php echo $row['id']?>" data-img="<?php echo $row['profile_img']?>">Delete</button>
                     </td>
                 </tr>
             <?php endwhile; ?>

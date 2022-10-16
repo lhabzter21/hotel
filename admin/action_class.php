@@ -51,7 +51,14 @@ class Action {
 	}
 
     public function update_customer() {
-        extract($_POST);
+		extract($_POST);
+
+		// check if username already exist
+		$customer = $this->db->query("SELECT * FROM customers WHERE username = '$username' AND id != '$id' AND deleted_at IS NULL");
+		if($customer->num_rows > 0) {
+			return 2;
+		}
+        
 		$data = " first_name = '$first_name' ";
 		$data .= ", last_name = '$last_name' ";
 		$data .= ", password = '$password' ";
@@ -60,30 +67,95 @@ class Action {
 		$data .= ", email = '$email' ";
 		$data .= ", username = '$username' ";
 		$data .= ", gender = '$gender' ";
+
+		if($_FILES['image']['tmp_name'] != ''){
+			// delete image
+			if(file_exists('uploads/profiles/'.$profile_img) && $profile_img != '') {
+				unlink('uploads/profiles/'.$profile_img);
+			} 
+
+			$img_name = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
+			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/profiles/'. $img_name);
+			$data .= ", profile_img = '$img_name' ";
+		}
 		
 		$this->db->query("UPDATE customers set ".$data." WHERE id=".$id);
 
-        return 0;
+        return 1;
     }
+
+	public function save_feedback() {
+		extract($_POST);
+		$data = " customer_id = '$customer_id' ";
+		$data .= ", comment = '$comment' ";
+		$data .= ", rating = '$rating' ";
+
+		$this->db->query("INSERT INTO feedbacks set ".$data);
+
+		return 0;
+	}
+
+	public function update_site_settings() {
+		extract($_POST);
+		$data = " hotel_name = '$hotel_name' ";
+		$data .= ", email = '$email' ";
+		$data .= ", contact = '$contact' ";
+		$data .= ", about_content = '$about_content' ";
+
+		if($_FILES['image']['tmp_name'] != ''){
+			// delete image
+			if(file_exists('uploads/cover_photo/'.$img) && $img != '') {
+				unlink('uploads/cover_photo/'.$img);
+			} 
+
+			$fname = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
+			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/cover_photo/'. $fname);
+			$data .= ", cover_img = '$fname' ";
+		}
+		
+		$this->db->query("UPDATE system_settings set ".$data." WHERE id=$id");
+
+		return 0;
+	}
 
 	public function delete_appointment() {
 		extract($_POST);
-		$delete = $this->db->query("DELETE FROM appointments where id = ".$id);
-		if($delete)
-			return 1;
+		$this->db->query("DELETE FROM appointments where id = ".$id);
+		return 1;
 	}
 
 	public function delete_services() {
 		extract($_POST);
-		$delete = $this->db->query("DELETE FROM services where id = ".$id);
+		$this->db->query("DELETE FROM services where id = ".$id);
 
 		// delete image
-		if(file_exists('uploads/'.$img)) {
+		if(file_exists('uploads/'.$img) && $img != '') {
 			unlink('uploads/'.$img);
 		} 
+		return 1;
+	}
 
-		if($delete)
-			return 1;
+	public function update_services() {
+		extract($_POST);
+		$data = " name = '$name' ";
+		$data .= ", price = '$price' ";
+		$data .= ", category_id = '$category_id' ";
+		$data .= ", description = '$description' ";
+
+		if($_FILES['image']['tmp_name'] != ''){
+			// delete image
+			if(file_exists('uploads/'.$img) && $img != '') {
+				unlink('uploads/'.$img);
+			} 
+
+			$fname = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
+			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/'. $fname);
+			$data .= ", img_path = '$fname' ";
+		}
+		
+		$this->db->query("UPDATE services set ".$data." WHERE id=$id");
+
+		return 0;
 	}
 
 	public function add_services() {
@@ -94,7 +166,7 @@ class Action {
 		$data .= ", description = '$description' ";
 
 		if($_FILES['image']['tmp_name'] != ''){
-			$fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['image']['name'];
+			$fname = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
 			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/'. $fname);
 			$data .= ", img_path = '$fname' ";
 		}
@@ -106,17 +178,119 @@ class Action {
 
 	public function add_appointment() {
 		extract($_POST);
+
+		// check if weekends
+		$weekDay = date('w', strtotime($appointment_date));
+		if($weekDay == 0 || $weekDay == 6) {
+			return 2;
+		}
+
+		// check if time range is correct
+		if(strtotime($from_time) > strtotime($to_time)) {
+			return 3;
+		}
+
 		$data = " customer_id = '$customer_id' ";
-		$data .= ", services_id = '$services_id' ";
+		if(isset($services_id)) {
+			$data .= ", services_id = '$services_id' ";
+		}
 		$data .= ", appointment_date = '$appointment_date' ";
 		$data .= ", from_time = '$from_time' ";
 		$data .= ", to_time = '$to_time' ";
 		
 		$this->db->query("INSERT INTO appointments set ".$data);
+
+		return 1;
+	}
+
+	public function add_products() {
+		extract($_POST);
+		$data = " name = '$name' ";
+		$data .= ", price = '$price' ";
+		$data .= ", description = '$description' ";
+		$data .= ", category_id = '$category_id' ";
+		$data .= ", status = '$status' ";
+		
+		$this->db->query("INSERT INTO products set ".$data);
+	}
+
+	public function add_user() {
+		extract($_POST);
+
+		// check if username already exist
+		$user = $this->db->query("SELECT * FROM users WHERE username = '$username'");
+		if($user->num_rows > 0) {
+			return 2;
+		}
+
+		$data = " name = '$name' ";
+		$data .= ", username = '$username' ";
+		$data .= ", password = '$password' ";
+		$data .= ", type = '$type' ";
+		
+		$this->db->query("INSERT INTO users set ".$data);
+
+		return 1;
+	}
+
+	public function update_user() {
+		extract($_POST);
+
+		// check if username already exist
+		$user = $this->db->query("SELECT * FROM users WHERE username = '$username' AND id != '$id'");
+		if($user->num_rows > 0) {
+			return 2;
+		}
+
+		$data = " name = '$name' ";
+		$data .= ", username = '$username' ";
+		if($password) {
+			$data .= ", password = '$password' ";
+		}
+		$data .= ", type = '$type' ";
+		
+		$this->db->query("UPDATE users set ".$data." WHERE id=$id");
+
+		return 1;
+	}
+
+	public function update_products() {
+		extract($_POST);
+		$data = " name = '$name' ";
+		$data .= ", price = '$price' ";
+		$data .= ", description = '$description' ";
+		$data .= ", category_id = '$category_id' ";
+		$data .= ", status = '$status' ";
+		
+		$this->db->query("UPDATE products set ".$data." WHERE id=$id");
+	}
+
+	public function delete_products() {
+		extract($_POST);
+		$this->db->query("DELETE FROM products where id = ".$id);
+		return 1;
+	}
+
+	public function delete_user() {
+		extract($_POST);
+		$this->db->query("DELETE FROM users where id = ".$id);
+		return 1;
 	}
 
 	public function update_appointment() {
 		extract($_POST);
+
+		// check if weekends
+		$weekDay = date('w', strtotime($appointment_date));
+		if($weekDay == 0 || $weekDay == 6) {
+			return 2;
+		}
+
+		// check if time range is correct
+		if(strtotime($from_time) > strtotime($to_time)) {
+			return 3;
+		}
+
 		$data = " customer_id = '$customer_id' ";
 		$data .= ", services_id = '$services_id' ";
 		$data .= ", appointment_date = '$appointment_date' ";
@@ -125,10 +299,17 @@ class Action {
 		$data .= ", status = '$status' ";
 		
 		$this->db->query("UPDATE appointments set ".$data." WHERE id=$id");
+
+		return 1;
 	}
 
 	public function delete_customer() {
         extract($_POST);
+		// delete image
+		if(file_exists('uploads/profiles/'.$img) && $img != '') {
+			unlink('uploads/profiles/'.$img);
+		} 
+
 		$date_today = date('Y-m-d H:i:s');
 		$this->db->query("UPDATE customers set `deleted_at` = '$date_today' WHERE id=$id");
 
@@ -144,17 +325,14 @@ class Action {
 	}
 
     public function register() {
-        $requests = $_POST;
-        $validate = $this->validation($requests);
+		extract($_POST);
 
-        if(count($validate) > 0) {
-            return [
-                'success' => 0,
-                'data' => $validate
-            ];
-        }
-
-        extract($_POST);
+		// check if username already exist
+		$customer = $this->db->query("SELECT * FROM customers WHERE username = '$username' AND deleted_at IS NULL");
+		if($customer->num_rows > 0) {
+			return 2;
+		} 
+			
 		$data = " first_name = '$fname' ";
 		$data .= ", last_name = '$lname' ";
 		$data .= ", password = '$password' ";
@@ -163,26 +341,18 @@ class Action {
 		$data .= ", email = '$email' ";
 		$data .= ", username = '$username' ";
 		$data .= ", gender = '$gender' ";
-		
-			
+
+		if($_FILES['image']['tmp_name'] != ''){
+			$img_name = strtotime(date('y-m-d H:i:s')).'_'.$_FILES['image']['name'];
+			$move = move_uploaded_file($_FILES['image']['tmp_name'],'uploads/profiles/'. $img_name);
+			$data .= ", profile_img = '$img_name' ";
+		}
 		
 		$this->db->query("INSERT INTO customers set ".$data);
 		
-        return [
-            'success' => 1,
-            'data' => []
-        ];
+		return 1;
+	
+			
     }
 
-    // returning of empty post requests
-    private function validation($requests) {
-        $empty_arr = [];
-        foreach($requests as $index => $value ) {
-            if($value == '') {
-                array_push($empty_arr, $index);
-            }
-        }
-
-        return $empty_arr;
-    }
 }
