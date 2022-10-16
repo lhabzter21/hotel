@@ -14,44 +14,44 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="first_name" required value="<?php echo $row['first_name']?>" aria-describedby="helpId" placeholder="">
+                    <label for="">First Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="first_name" onkeypress="return /[a-z]/i.test(event.key)" required value="<?php echo $row['first_name']?>" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="last_name" required value="<?php echo $row['last_name']?>" aria-describedby="helpId" placeholder="">
+                    <label for="">Last Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="last_name" onkeypress="return /[a-z]/i.test(event.key)" required value="<?php echo $row['last_name']?>" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" required value="<?php echo $row['username']?>" aria-describedby="helpId" placeholder="">
+                    <label for="">Username <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="username" minlength="4" required value="<?php echo $row['username']?>" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" required value="<?php echo $row['password']?>" aria-describedby="helpId" placeholder="">
+                    <label for="">Password <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" name="password" minlength="6" required value="<?php echo $row['password']?>" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Contact No.</label>
-                    <input type="number" class="form-control" name="contact_num" id="contact_num" required value="<?php echo $row['contact_num']?>" aria-describedby="helpId" placeholder="">
+                    <label for="">Contact No. <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="contact_num" required value="<?php echo $row['contact_num']?>" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" name="email" id="c_email" required value="<?php echo $row['email']?>" aria-describedby="helpId" placeholder="">
+                    <label for="">Email <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" name="email" required value="<?php echo $row['email']?>" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="">Gender</label>
-                    <select class="form-control" name="gender" id="gender" required>
+                    <select class="form-control" name="gender" required>
                         <option value="Male" <?php echo $row['gender'] == 'Male' ? 'Selected':''?>>Male</option>
                         <option value="Female" <?php echo $row['gender'] == 'Female' ? 'Selected':''?>>Female</option>
                     </select>
@@ -59,8 +59,15 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Address</label>
-                    <textarea class="form-control" name="address" id="address" required cols="30" rows="5"><?php echo $row['address']?></textarea>
+                    <label for="">Upload New Profile image</label>
+                    <input type="file" name="image" class="form-control" accept="image/x-png,image/gif,image/jpeg">
+                    <input type="hidden" name="profile_img" value="<?php echo $row['profile_img']?>">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="">Address <span class="text-danger">*</span></label>
+                    <textarea class="form-control" name="address" required cols="30" rows="5"><?php echo $row['address']?></textarea>
                 </div>
             </div>
             <div class="col-sm-12">

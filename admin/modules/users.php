@@ -2,7 +2,7 @@
     <h1 class="text-success">Users</h1>
     <hr class="mb-5"/>
 
-    <button class="btn btn-success">
+    <button class="btn btn-success btn-user-add">
         <i class="fa-solid fa-plus"></i> Add New User
     </button>
 
@@ -36,8 +36,8 @@
                         <?php echo $row['type'] == 1 ? 'Admin':'Staff'; ?>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-primary">Edit</button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <button class="btn btn-sm btn-primary btn-user-edit" data-id="<?php echo $row['id']?>" >Edit</button>
+                        <button class="btn btn-sm btn-danger btn-user-delete" data-id="<?php echo $row['id']?>">Delete</button>
                     </td>
                 </tr>
             <?php endwhile; ?>

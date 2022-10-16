@@ -41,16 +41,52 @@
     <?php if($_SESSION['login_type'] == 3){?>
         <div class="container my-5 p-5">
             <div class="box">
-                <div class="row">
-                    <div class="col-md-8">
-                        <label for="" class="mb-2">Apointment Date</label>
-                        <input type="text" class="form-control input-lg" id="range_date">
+                <form id="frm_set_appointment">
+                    <input type="hidden" name="customer_id" value="<?php echo $_SESSION['login_id']?>">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="" class="mb-2">Apointment Date</label>
+                            <input type="date" name="appointment_date" id="date1" class="form-control" required>
+
+                            <br/>
+
+                            <label for="" class="mb-2">From</label>
+                            <input type="time" min="09:00" max="18:00" name="from_time" class="form-control" required>
+
+                            <br/>
+
+                            <label for="" class="mb-2">To</label>
+                            <input type="time" min="09:00" max="18:00" name="to_time" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="mb-2">&nbsp;</label>
+                            <button class="btn btn-primary btn-block btn-orange" >Make an Appointment</button>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="mb-2">&nbsp;</label>
-                        <button class="btn btn-primary btn-block btn-orange" id="btn_check_sched">Check Schedule</button>
-                    </div>
+                </form>
+
+                <div class="alert alert-info my-5">
+                    <b>Note:</b> No available schedule on weekends and Open hours 9:00am to 6:00pm
                 </div>
+
+                <?php 
+                    $my_app = $conn->query("SELECT * FROM appointments WHERE customer_id =".$_SESSION['login_id']." AND `status` = '0'");
+                    while( $row = $my_app->fetch_assoc()):
+                ?>
+
+                    <div class="box mb-3 py-4">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <?php echo date("M d, Y",strtotime($row['appointment_date'])) . " From ". date("h:i A",strtotime($row['from_time'])) . " To ". date("h:i A",strtotime($row['to_time']))?>
+                                </td>
+                                <td class="text-right"><span class="badge badge-warning">Waiting</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                <?php endwhile; ?>
+
             </div>
         </div>
     <?php } ?>

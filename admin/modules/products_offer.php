@@ -5,45 +5,47 @@
     <div class="row">
         <div class="col-lg-4 col-md-12 mb-3">
             <div class="card">
-                <div class="card-header">
-                    Product Form
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="">Product Name <span class="text-danger">*</span></label>
-                        <input type="text"  class="form-control" name="" aria-describedby="helpId" placeholder="">
+                <form id="frm_products_add">
+                    <div class="card-header">
+                        Product Form
                     </div>
-                    <div class="form-group">
-                        <label for="">Price (₱) <span class="text-danger">*</span></label>
-                        <input type="number"  class="form-control" name="" aria-describedby="helpId" placeholder="">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="">Product Name <span class="text-danger">*</span></label>
+                            <input type="text"  class="form-control" name="name" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Price (₱) <span class="text-danger">*</span></label>
+                            <input type="number"  class="form-control" name="price" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description <small class="text-muted">(Optional)</small> </label>
+                            <textarea class="form-control" name="description" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Category <span class="text-danger">*</span></label>
+                            <select name="category_id" class="form-control" required>
+                                <?php
+                                    $cat = $conn->query("SELECT * FROM categories order by name asc ");
+                                    while($row= $cat->fetch_assoc()) {
+                                        $cat_name[$row['id']] = $row['name'];
+                                ?>
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Availability <span class="text-danger">*</span></label>
+                            <select class="form-control" name="status" required >
+                                <option value="0">Available</option>
+                                <option value="1">Unavailable</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Description</label>
-                        <textarea class="form-control" name="" cols="30" rows="5"></textarea>
+                    <div class="card-footer">
+                        <button class="btn btn-success" type="submit">Add Record</button>
                     </div>
-                    <div class="form-group">
-                        <label for="">Category <span class="text-danger">*</span></label>
-                        <select name="" class="form-control">
-                            <?php
-                                $cat = $conn->query("SELECT * FROM categories order by name asc ");
-                                while($row= $cat->fetch_assoc()) {
-                                    $cat_name[$row['id']] = $row['name'];
-                            ?>
-                                <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Availability <span class="text-danger">*</span></label>
-                        <select class="form-control" name="">
-                            <option value="0">Available</option>
-						    <option value="1">Unavailable</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-success">Add Record</button>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -95,8 +97,8 @@
                                         <?php echo $row['status'] == 0 ? '<span class="badge badge-success">Available</span>':'<span class="badge badge-secondary">Not available</span>' ?>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="btn btn-primary btn-products-edit" data-id="<?php echo $row['id']?>" >Edit</button>
+                                        <button class="btn btn-danger btn-products-delete" data-id="<?php echo $row['id']?>" >Delete</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

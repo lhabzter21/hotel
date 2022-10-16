@@ -45,11 +45,11 @@
                         <form id="login-form" >
                             <div class="form-group">
                                 <label for="">Username</label>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId">
+                                <input type="text" name="username" id="username" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="" required>
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>

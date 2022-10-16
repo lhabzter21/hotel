@@ -8,7 +8,7 @@
 <script src="../lib/notify/notify.min.js"></script>
 <!-- DataTables -->
 <script src="../lib/DataTables/datatables.min.js"></script>
-<!-- DataTables -->
+<!-- Sweet Alert -->
 <script src="../lib/sweetalert/sweetalert.min.js"></script>
 
 <!-- ChartJS -->
