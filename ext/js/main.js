@@ -372,7 +372,9 @@ $(document).on('submit', '#frm_customer', function(e) {
                 setTimeout(function() {
                     location.reload();
                 },1000)
-            } else {
+            } else if(res == 3){
+                swal("Invalid!", "Must be image!", "error");
+            }else {
                 swal("Invalid!", "Username already exist!", "error");
             }
                 
@@ -394,10 +396,14 @@ $(document).on('submit', '#frm_site_settings', function(e) {
         contentType: false,
         processData: false,
         success: function(res) {
-            swal("Success!", "Successfully Updated!", "success");
-            setTimeout(function() {
-                location.reload();
-            },1000)
+            if(res == 1) {
+                swal("Success!", "Successfully Updated!", "success");
+                setTimeout(function() {
+                    location.reload();
+                },1000)
+            } else {
+                swal("Invalid!", "Must be image!", "error");
+            }
         },
         error: function(res) {
             console.log(res)
@@ -445,6 +451,8 @@ $(document).on('submit', '#frm_customer_add', function(e) {
                 setTimeout(function() {
                     location.reload();
                 },1000)
+            } else if(res == 3){
+                swal("Invalid!", "Must be Image!", "error");
             } else {
                 swal("Invalid!", "Username already exist!", "error");
             }
@@ -580,10 +588,14 @@ $(document).on('submit', '#frm_services_add', function(e) {
         contentType: false,
         processData: false,
         success: function(res) {
-            swal("Success!", "Successfully Added!", "success");
-            setTimeout(function() {
-                location.reload();
-            },1000)
+            if(res == 1) {
+                swal("Success!", "Successfully Added!", "success");
+                setTimeout(function() {
+                    location.reload();
+                },1000)
+            } else {
+                swal("Invalid!", "Must be Image!", "error");
+            }
         },
         error: function(res) {
             console.log(res)
@@ -602,10 +614,14 @@ $(document).on('submit', '#frm_services_edit', function(e) {
         contentType: false,
         processData: false,
         success: function(res) {
-            swal("Success!", "Successfully Updated!", "success");
-            setTimeout(function() {
-                location.reload();
-            },1000)
+            if(res == 1) {
+                swal("Success!", "Successfully Updated!", "success");
+                setTimeout(function() {
+                    location.reload();
+                },1000)
+            } else {
+                swal("Invalid!", "Must be Image!", "error");
+            }
         },
         error: function(res) {
             console.log(res)

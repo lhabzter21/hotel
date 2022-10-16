@@ -6,34 +6,23 @@
             $meta[$k] = $val;
         }
     }
+
+    $user= $conn->query("SELECT * from customers WHERE id = ".$meta['customer_id']);
+    if($user->num_rows > 0){
+        foreach($user->fetch_array() as $k => $val){
+            $meta2[$k] = $val;
+        }
+    }
 ?>
 <form id="frm_appointment_edit">
     <div class="modal-body">
         <input type="hidden" name="id" value="<?php echo $meta['id'] ?>">
+        <input type="hidden" name="customer_id" value="<?php echo $meta['customer_id'] ?>">
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="">Select Customer</label>
-                    <select name="customer_id" class="form-control" required>
-                        <option value=""></option>
-                        <?php
-                            $qry_appointment_customer = $conn->query("
-                                    SELECT 
-                                        id,
-                                        first_name,
-                                        last_name
-                                    FROM 
-                                        customers 
-                                    WHERE 
-                                        deleted_at IS NULL
-                                    ORDER BY 
-                                        first_name ASC
-                                ");
-                            while( $row = $qry_appointment_customer->fetch_assoc()):
-                        ?> 
-                            <option value="<?php echo $row['id']?>" <?php echo $meta['customer_id'] == $row['id'] ? 'selected':'' ?>><?php echo strtoupper($row['first_name']). ' '.strtoupper($row['last_name'])?></option>
-                        <?php endwhile; ?>
-                    </select>
+                    <label for="">Customer Name</label>
+                    <input type="text" disabled class="form-control" value="<?php echo strtoupper($meta2['first_name']) .' '.strtoupper($meta2['last_name'])?>"> 
                 </div>
             </div>
             <div class="col-sm-12">
